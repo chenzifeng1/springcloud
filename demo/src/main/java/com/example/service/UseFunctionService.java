@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
  * Created by 陈子枫 on 2016/12/19.
  */
 @Service
-public class UseSExample {
+public class UseFunctionService {
     @Autowired
     FunctionService functionService;
 
