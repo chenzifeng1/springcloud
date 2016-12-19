@@ -1,0 +1,17 @@
+package com.example.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * Created by 陈子枫 on 2016/12/19.
+ */
+@Service
+public class UseSExample {
+    @Autowired
+    FunctionService functionService;
+
+    public String sayHello(String world){
+        return  functionService.sayHello(world);
+    }
+}
