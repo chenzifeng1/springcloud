@@ -11,7 +11,7 @@ public class UseFunctionService {
     @Autowired
     FunctionService functionService;
 
-    public String sayHello(String world){
-        return  functionService.sayHello(world);
+    public String sayHello(String word){
+        return  functionService.sayHello(word);
     }
 }

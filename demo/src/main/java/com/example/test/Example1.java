@@ -16,7 +16,7 @@ public class Example1 {
         UseFunctionService sExample = annotationConfigApplicationContext.getBean(UseFunctionService.class);
         System.out.println(sExample.sayHello("di"));
         annotationConfigApplicationContext.close();
-        System.out.println(123);
+
     }
 
 }
