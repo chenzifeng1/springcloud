@@ -3,8 +3,12 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: default
-  datasource:
-    url: localhost:3306
-    username: root
-    password: czf001413
-    driver-class-name: com.
+  application:
+    name: book_manage
+#  datasource:
+#    url: localhost:3306
+#    username: root
+#    password: czf001413
+#    driver-class-name: com.
+server:
+  port: 8081

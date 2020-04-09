@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<!--    配置控制台appender(附加器)  -->
+    <appender name="STDOUT" class ="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+<!--    控制台日志打印格式  -->
+            <pattern>[%d{yyyy-MM-dd'T'HH-mm-ss.sss'Z'}][%C][%t][%L][%-5p] %m%n</pattern>
+        </encoder>
+    </appender>
+<!--    配置日志文件appender   -->
+    <appender name ="FILE" class="ch.qos.logback.core.FileAppender">
+        <File>log</File>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd'T'HH-mm-ss.sss'Z'}][%C][%t][%L][%-5p] %m%n</pattern>
+        </encoder>
+    </appender>
+
+
+<!--    配置root级别日志  -->
+    <root level ="INFO">
+        <appender-ref ref ="STDOUT"/>
+    </root>
+
+
+</configuration>

@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class BookTpye {
+public class BookType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,8 +14,11 @@ public class BookTpye {
 
     private String typeName;
 
-    public BookTpye() {
+    public BookType() {
     }
 
+    public BookType(String typeName){
+        this.typeName = typeName;
+    }
 
 }
