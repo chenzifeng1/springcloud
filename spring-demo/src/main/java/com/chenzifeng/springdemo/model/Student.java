@@ -1,6 +1,6 @@
 package com.chenzifeng.springdemo.model;
 
-import com.chenzifeng.springdemo.tool.Gender;
+import com.chenzifeng.springdemo.util.GenderEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+
 public class Student extends User {
 
     @Id
@@ -23,13 +24,13 @@ public class Student extends User {
 
 
 
-    public Student(String name, String kind, Gender gender) {
-        super(name, kind, gender);
+    public Student(String name, String kind, GenderEnum genderEnum) {
+        super(name, kind, genderEnum);
         this.creatAt = System.currentTimeMillis();
     }
 
-    public Student(String name, String kind, Gender gender, String schoolId, String marge, String classNum) {
-        super(name, kind, gender);
+    public Student(String name, String kind, GenderEnum genderEnum, String schoolId, String marge, String classNum) {
+        super(name, kind, genderEnum);
         this.schoolId = schoolId;
         this.marge = marge;
         this.classNum = classNum;

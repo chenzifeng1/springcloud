@@ -1,4 +1,4 @@
-package com.chenzifeng.springdemo.tool;
+package com.chenzifeng.springdemo.util;
 
 /**
  * LEND:图书借出状态，存在于借出者
@@ -7,6 +7,6 @@ package com.chenzifeng.springdemo.tool;
  * TIMEOUT:换书超时
  * EXCEPTION:该书处于异常状态
  */
-public enum BookStatus {
+public enum BookStatusEnum {
     LEND,ON,OFF,TIMEOUT,EXCEPTION
 }

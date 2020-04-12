@@ -1,6 +1,6 @@
 package com.chenzifeng.springdemo.model;
 
-import com.chenzifeng.springdemo.tool.BookStatus;
+import com.chenzifeng.springdemo.util.BookStatusEnum;
 
 import javax.persistence.*;
 
@@ -16,7 +16,7 @@ public class Book {
     private int num; //总数量
     private int restNum; //剩余数量
     private long recordId; //借出记录
-    private BookStatus bookStatus;
+    private BookStatusEnum bookStatus;
     private String bookName;
     private String author;
 
@@ -26,7 +26,7 @@ public class Book {
         this.author = author;
         this.typeId = typeId;
         this.num = num;
-        this.bookStatus = BookStatus.ON;
+        this.bookStatus = BookStatusEnum.ON;
     }
 
 
@@ -67,11 +67,11 @@ public class Book {
         this.recordId = recordId;
     }
 
-    public BookStatus getBookStatus() {
+    public BookStatusEnum getBookStatus() {
         return bookStatus;
     }
 
-    public void setBookStatus(BookStatus bookStatus) {
+    public void setBookStatus(BookStatusEnum bookStatus) {
         this.bookStatus = bookStatus;
     }
 

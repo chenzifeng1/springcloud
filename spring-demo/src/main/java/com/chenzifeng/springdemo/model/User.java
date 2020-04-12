@@ -1,18 +1,18 @@
 package com.chenzifeng.springdemo.model;
 
-import com.chenzifeng.springdemo.tool.Gender;
+import com.chenzifeng.springdemo.util.GenderEnum;
 
 
 public abstract class User {
 
     private String Name;
     private String kind;
-    private Gender gender;
+    private GenderEnum genderEnum;
 
-    public User(String name, String kind, Gender gender) {
+    public User(String name, String kind, GenderEnum genderEnum) {
         Name = name;
         this.kind = kind;
-        this.gender = gender;
+        this.genderEnum = genderEnum;
     }
 
     public User(String name) {
@@ -38,12 +38,12 @@ public abstract class User {
         this.kind = kind;
     }
 
-    public Gender getGender() {
-        return gender;
+    public GenderEnum getGenderEnum() {
+        return genderEnum;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public void setGenderEnum(GenderEnum genderEnum) {
+        this.genderEnum = genderEnum;
     }
 
 

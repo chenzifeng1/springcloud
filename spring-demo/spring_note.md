@@ -1,6 +1,8 @@
 # Spring boot学习笔记
 spring boot 典型布局结构
 ![spring boot 典型布局结构](img/目录结构.PNG)
+spring 包结构
+![](img/Spring包结构及内容.PNG)
 ## Spring boot bean和依赖注入
 在Spring Boot中，可以使用Spring Framework来定义bean及其依赖注入。 @ComponentScan注释用于查找bean以及使用@Autowired注释注入的相应内容。
 如果遵循Spring Boot典型布局，则无需为@ComponentScan注释指定任何参数。 所有组件类文件都自动注册到Spring Beans。
