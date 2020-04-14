@@ -37,3 +37,6 @@ spring 包结构
 ```
 
 ## 异常处理
+
+
+## @AutoWried和@Resource是如何进行依赖注入的 
