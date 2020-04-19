@@ -1,14 +1,8 @@
 spring:
-  data:
-    jpa:
-      repositories:
-        bootstrap-mode: default
-  application:
-    name: book_manage
-#  datasource:
-#    url: localhost:3306
-#    username: root
-#    password: czf001413
-#    driver-class-name: com.
-server:
-  port: 8081
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/book_manage
+    username: root
+    password: czf001413
+    test-while-idle: true
+    validation-query: SELECT 1
+    driver-class-name: com.mysql.jdbc.Driver

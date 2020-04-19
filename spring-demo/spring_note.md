@@ -39,4 +39,9 @@ spring 包结构
 ## 异常处理
 
 
-## @AutoWried和@Resource是如何进行依赖注入的 
+## @AutoWried和@Resource是如何进行依赖注入的   
+
+
+## 关于Spring实体关系与数据库中表的映射问题
+1. 两张表是一对一的关系： 
+    如：一条借阅记录对应一本书
