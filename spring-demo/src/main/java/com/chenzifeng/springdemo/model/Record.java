@@ -1,5 +1,7 @@
 package com.chenzifeng.springdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Map;
 
@@ -17,8 +19,11 @@ public class Record {
     private boolean isDeal;
     private boolean hasRest;
 
-    public Record(int userId,int bookId){
-        this.userId = userId;
+    @ManyToOne(optional = false)
+    private Student student;
+
+    public Record(Student student,int bookId){
+        this.student = student;
         this.bookId = bookId;
         this.createAt = System.currentTimeMillis();
     }
@@ -64,5 +69,19 @@ public class Record {
 
     public void setHasRest(boolean hasRest) {
         this.hasRest = hasRest;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+
+    /**
+     * 为了防止Student转换为JSon对象时，出现无限包含的关系，设置@JsonBackReference
+     * @param student
+     */
+    @JsonBackReference
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

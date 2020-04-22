@@ -2,13 +2,12 @@ package com.chenzifeng.springdemo.model;
 
 import com.chenzifeng.springdemo.util.GenderEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-
+@Table(name = "student")
 public class Student extends User {
 
     @Id
@@ -19,9 +18,12 @@ public class Student extends User {
     private String marge; //专业
     private String classNum; //班级
 
+
+
     private long creatAt; //创建时间
 
-
+    @OneToMany(mappedBy = "student")
+    private Set<Book> book = new HashSet<>();
 
 
     public Student(String name, String kind, GenderEnum genderEnum) {
