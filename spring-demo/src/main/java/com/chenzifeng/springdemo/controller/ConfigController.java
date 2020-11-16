@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.tools.java.Environment;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +15,6 @@ public class ConfigController {
 
     @Value("${sever.port=8081}")
     private String port;
-
-
 
 
     @GetMapping("/config")

@@ -13,8 +13,12 @@ public class Book {
     private int id;
 
     private int typeId;
-    private int num; //总数量
-    private int restNum; //剩余数量
+    /**
+     * 总数量
+     */
+    private int num;
+    //剩余数量
+    private int restNum;
     private String bookName;
     private String author;
 
@@ -24,7 +28,8 @@ public class Book {
         this.author = author;
         this.typeId = typeId;
         this.num = num;
-        this.restNum = num; //添加图书时，剩余数量与总数量一致
+        //添加图书时，剩余数量与总数量一致
+        this.restNum = num;
     }
 
 

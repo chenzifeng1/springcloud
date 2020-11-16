@@ -13,11 +13,12 @@ public class Student extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    private String schoolId; //学号
-    private String marge; //专业
-    private String classNum; //班级
-
+    //学号
+    private String schoolId;
+    //专业
+    private String marge;
+    //班级
+    private String classNum;
 
 
     private long creatAt; //创建时间
