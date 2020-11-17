@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.czf.program.programpractice.mapper.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.czf.program.programpractice.entity.Permission" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="C" property="c" jdbcType="INTEGER" />
+    <result column="R" property="r" jdbcType="INTEGER" />
+    <result column="U" property="u" jdbcType="INTEGER" />
+    <result column="D" property="d" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME, URL, C, R, U, D
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from permission
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.czf.program.programpractice.entity.Permission" >
+    insert into permission (ID, NAME, URL, 
+      C, R, U, D
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{c,jdbcType=INTEGER}, #{r,jdbcType=INTEGER}, #{u,jdbcType=INTEGER}, #{d,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.czf.program.programpractice.entity.Permission" >
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="c != null" >
+        C,
+      </if>
+      <if test="r != null" >
+        R,
+      </if>
+      <if test="u != null" >
+        U,
+      </if>
+      <if test="d != null" >
+        D,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null" >
+        #{c,jdbcType=INTEGER},
+      </if>
+      <if test="r != null" >
+        #{r,jdbcType=INTEGER},
+      </if>
+      <if test="u != null" >
+        #{u,jdbcType=INTEGER},
+      </if>
+      <if test="d != null" >
+        #{d,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.czf.program.programpractice.entity.Permission" >
+    update permission
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null" >
+        C = #{c,jdbcType=INTEGER},
+      </if>
+      <if test="r != null" >
+        R = #{r,jdbcType=INTEGER},
+      </if>
+      <if test="u != null" >
+        U = #{u,jdbcType=INTEGER},
+      </if>
+      <if test="d != null" >
+        D = #{d,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.czf.program.programpractice.entity.Permission" >
+    update permission
+    set NAME = #{name,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      C = #{c,jdbcType=INTEGER},
+      R = #{r,jdbcType=INTEGER},
+      U = #{u,jdbcType=INTEGER},
+      D = #{d,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

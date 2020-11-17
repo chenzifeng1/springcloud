@@ -38,5 +38,10 @@ public interface AccountRoleMapper {
      */
     int updateByPrimaryKeySelective(AccountRole record);
 
-    int updateByPrimaryKey(AccountRole record);
+    /**
+     * 根据主键更新
+     * @param record
+     * @return
+     */
+    int updateById(AccountRole record);
 }

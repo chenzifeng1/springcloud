@@ -62,7 +62,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.czf.program.programpractice.entity.AccountRole" >
+  <update id="updateById" parameterType="com.czf.program.programpractice.entity.AccountRole" >
     update account_role
     set ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
       ROLE_ID = #{roleId,jdbcType=INTEGER}
