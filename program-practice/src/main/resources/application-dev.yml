@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8082
   servlet: /userManager
 spring:
   datasource:
@@ -7,13 +7,15 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    type: com.alibaba.druid.pool.DruidDataSource
+  #    type: com.alibaba.druid.pool.DruidDataSource
 
-  # 当前激活的配置文件是：
-  profiles:
-    active: dev
     # mybatis配置
 mybatis:
   mapperLocations: classpath*:mapper/**/*.xml
   configuration:
     call-setters-on-nulls: true
+
+
+## 以下可以自己定义配置属性值
+config:
+  systemName: czf
