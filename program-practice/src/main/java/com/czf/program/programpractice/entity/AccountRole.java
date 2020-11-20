@@ -1,6 +1,8 @@
 package com.czf.program.programpractice.entity;
 
-public class AccountRole {
+import java.io.Serializable;
+
+public class AccountRole implements Serializable {
     private Integer id;
 
     private String accountId;

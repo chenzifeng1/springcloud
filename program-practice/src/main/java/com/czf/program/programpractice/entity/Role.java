@@ -1,6 +1,8 @@
 package com.czf.program.programpractice.entity;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
     private Integer id;
 
     private String roleName;

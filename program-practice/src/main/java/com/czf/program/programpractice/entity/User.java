@@ -1,5 +1,8 @@
 package com.czf.program.programpractice.entity;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * @ProjectName: program-practice
  * @Package: com.czf.program.programpractice.entity
@@ -9,7 +12,7 @@ package com.czf.program.programpractice.entity;
  * @Date: 2020/11/16 18:22
  * @Version: 1.0
  */
-public class User {
+public class User implements Serializable {
 
     private String id;
     private String username;
@@ -30,6 +33,15 @@ public class User {
      * 用户状态
      */
     private int status;
+    /**
+     * 用户拥有的角色列表
+     */
+    private List<Role> roleList;
+
+    /**
+     * 用户拥有的权限列表
+     */
+    private List<Permission> permissionList;
 
     public User(String username, String password, String email, String headImg) {
         this.username = username;
@@ -98,4 +110,29 @@ public class User {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+    public List<Permission> getPermissionList() {
+        return permissionList;
+    }
+
+    public void setPermissionList(List<Permission> permissionList) {
+        this.permissionList = permissionList;
+    }
+
 }

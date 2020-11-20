@@ -2,6 +2,7 @@ package com.czf.program.programpractice.mapper;
 
 import com.czf.program.programpractice.entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @Date: 2020/11/16 19:16
  * @Version: 1.0
  */
+@Repository
 public interface UserMapper {
     /**
      * 获取所有用户信息
@@ -34,8 +36,6 @@ public interface UserMapper {
      * @return
      */
     User findOneByName(@Param("username") String name);
-
-
 
 
 }

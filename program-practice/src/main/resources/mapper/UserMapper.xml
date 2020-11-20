@@ -7,8 +7,21 @@
         <result column="USERNAME" property="username"/>
         <result column="PASSWORD" property="password"/>
         <result column="TELEPHONE" property="telephone"/>
-        <result column="HEADIMG" property="headImg"/>
-        <result column="STATUS" property="headImg"/>
+        <result column="HEAD_IMG" property="headImg"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+
+    <resultMap id="UserMap" type="com.czf.program.programpractice.entity.User">
+        <result column="ID" property="id"/>
+        <result column="USERNAME" property="username"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="TELEPHONE" property="telephone"/>
+        <result column="HEAD_IMG" property="headImg"/>
+        <result column="STATUS" property="status"/>
+        <collection property="roleList" ofType="com.czf.program.programpractice.entity.Role">
+            <id column="ID" property="id" jdbcType="INTEGER" />
+            <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+        </collection>
     </resultMap>
     <select id="findAll" resultType="com.czf.program.programpractice.entity.User">
         select * from my_user
