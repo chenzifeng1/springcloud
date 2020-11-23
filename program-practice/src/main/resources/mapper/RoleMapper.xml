@@ -8,13 +8,20 @@
   <sql id="Base_Column_List" >
     ID, ROLE_NAME
   </sql>
+  <sql id="User_Role">
+    user.ID as uid,
+  </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from role
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectRolesByUser" resultType="com.czf.program.programpractice.entity.Role">
+    select * from role
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from role
     where ID = #{id,jdbcType=INTEGER}
   </delete>
