@@ -1,6 +1,10 @@
 package com.czf.program.programpractice.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.czf.program.programpractice.entity.Role;
+import com.czf.program.programpractice.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,5 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/role")
 public class RoleController {
     @Autowired
+    private RoleService roleService;
 
+    @PostMapping("/addRole")
+    public JSONObject addRole(JSONObject jsonObject) {
+
+        roleService.addRole(new Role());
+        return new JSONObject();
+    }
 }

@@ -25,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findRoleById(int id) {
-        if(id<0){
+        if (id < 0) {
             throw new IllegalArgumentException("RoleId请求异常");
         }
         return roleMapper.selectByPrimaryKey(id);
@@ -33,9 +33,17 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> findRolesByUser(User user) {
-        if(user==null){
+        if (user == null) {
             throw new IllegalArgumentException("用户信息异常");
         }
         return roleMapper.selectRolesByUser(user);
+    }
+
+    @Override
+    public boolean addRole(Role role) {
+        if (role == null) {
+            throw new IllegalArgumentException("添加角色失败，检查角色信息是否完整");
+        }
+        return roleMapper.insert(role)==1;
     }
 }

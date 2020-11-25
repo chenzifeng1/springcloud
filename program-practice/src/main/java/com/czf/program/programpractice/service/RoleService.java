@@ -31,5 +31,11 @@ public interface RoleService {
      */
     List<Role> findRolesByUser(User user);
 
+    /**
+     * 增加role
+     * @param role
+     * @return 是否添加成功
+     */
+    boolean addRole(Role role);
 
 }
