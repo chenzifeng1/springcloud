@@ -41,8 +41,7 @@ public class FileController {
             File upload = new File(path.getAbsolutePath(), "/static/upload");
             logger.info("upload:" + upload);
             file.transferTo(new File(upload + "/" + file.getOriginalFilename()));
-
-
+            
         } catch (IllegalStateException e) {
             logger.error("文件或用户信息错误",e);
         } catch (FileNotFoundException e) {

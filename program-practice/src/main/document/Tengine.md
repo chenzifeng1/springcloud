@@ -21,3 +21,15 @@ Nginx是一个高性能的**Http**和**反向代理**服务器，也是一个IMA
 - 虚拟主机
 - 伪静态: URLRewrite
 - 动静分离
+
+### Nginx异步处理I/O
+   Nginx是多进程的服务器，当面对多个I/O请求时，与内核绑定的多个进程可以生成多个线程，这些线程并不会实际处理I/O（包括网络I/O和磁盘I/O）。  
+ 而是使用OS的内核去处理这些I/O,线程只监控I/O的状态,状态发送变化时通知线程，线程在通知Nginx。  
+ ![ginx异步处理I/O](../../../img/Nginx异步处理IO.PNG)
+ 有两个参数:
+ - worker_processes: Nginx启动的服务进程数
+ - worker_connections: 每个服务进程可以处理的最大连接数  
+ 如果我想要并发处理5K个请求，我可以将`worker_processes`设置为5，`worker_connections`设置为1K。  
+ 但是Linux系统中设置之后是否起作用，还受限于OS
+ 
+
