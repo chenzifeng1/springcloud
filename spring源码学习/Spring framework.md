@@ -183,3 +183,77 @@ protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
 `allowBeanDefinitionOveriding` : 允许Bean定义信息被重写
 
 `allowCircularReferences` : 允许引入循环依赖
+
+之后看一下加载bean定义信息这个方法，方法注释如下：
+
+通过将委派给一个或多个bean定义读取器，将bean定义加载到给定的bean工厂中。
+
+`loadBeanDefinitions(beanFactory);` 
+
+我们可以看一下如何让通过beanDefinationReader来完成bean定义信息加载的，下面是这个抽象方法的实现类
+
+```java
+protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throws BeansException, IOException {
+   // Create a new XmlBeanDefinitionReader for the given BeanFactory.
+   XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
+
+   // Configure the bean definition reader with this context's
+   // resource loading environment.
+   beanDefinitionReader.setEnvironment(this.getEnvironment());
+   beanDefinitionReader.setResourceLoader(this);
+   beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
+
+   // Allow a subclass to provide custom initialization of the reader,
+   // then proceed with actually loading the bean definitions.
+   initBeanDefinitionReader(beanDefinitionReader);
+   loadBeanDefinitions(beanDefinitionReader);
+}
+```
+
+上述代码进行几个操作：
+
+1. 为给定的BeanFactory初始化一个XmlBeanDefinitionReader的对象，初始化的时候会有很多操作，暂时先不去深究。
+2. 为这个XmlBeanDefinitionReader对象设置一些属性：
+    1. private Environment environment(系统环境属性)：设置在读取bean定义时要使用的环境。 最常用于评估概要文件信息，以确定应读取哪些bean定义，应省略哪些。
+    2. private ResourceLoader resourceLoader(资源加载器)：设置ResourceLoader以用于资源位置。 如果指定ResourcePatternResolver，则Bean定义读取器将能够将资源模式解析为Resource数组。
+    3. private EntityResolver entityResolver(资源实体解析器)：设置要用于解析的SAX实体解析器。
+3. initBeanDefinitionReader(beanDefinitionReader);
+
+    注释：初始化用于加载此上下文的Bean定义的Bean定义读取器。 默认实现为空。
+    可以在子类中重写，例如，用于关闭XML验证或使用其他XmlBeanDefinitionParser实现
+
+    ```java
+    protected void initBeanDefinitionReader(XmlBeanDefinitionReader reader) {
+       reader.setValidating(this.validating);
+    }
+    ```
+
+    在这个方法中调用了reader中设置验证的方法，参数是Boolean类型。我们可以看看这个设置验证方法的实现。
+
+    ```java
+    public void setValidating(boolean validating) {
+       this.validationMode = (validating ? VALIDATION_AUTO : VALIDATION_NONE);
+       this.namespaceAware = !validating;
+    }
+    ```
+
+    这个方法设置了校验模式，是否启用Xml验证，默认是true。如果参数是false，就会启用命名空间Aware，一边在这种情况下能正确处理架构的命名空间。这里先记一下，看看这两个值在之后哪里使用了，结合使用场景来对这两个属性理解。
+
+4. loadBeanDefinitions(beanDefinitionReader);
+
+    注释：根据给定的XmlBeanDefinitionReader来加载bean定义信息，由于bean Factory的生命周期是由`refreshBeanFactory()`这个方法来处理，因此`loadBeanDefinitions()`这个方法应该只用来加载或者是注册bean定义信息
+
+    ```java
+    protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansException, IOException {
+       Resource[] configResources = getConfigResources();
+       if (configResources != null) {
+          reader.loadBeanDefinitions(configResources);
+       }
+       String[] configLocations = getConfigLocations();
+       if (configLocations != null) {
+          reader.loadBeanDefinitions(configLocations);
+       }
+    }
+    ```
+
+    这里主要看参数为字符数组的`loadBeanDefinitions(String...locations)` ,这个getConfigLocations()方法返回一系列资源地址，子类可以重写这个方法设置，以提供一组资源位置以从中加载bean定义。比如说，我在Resources下新建了一个配置文件“myApplicationContext.xml”,在getConfigLocation的时候会读取到这个配置文件的文件名，在之后加载过程中会读取该配置文件中的bean配置信息。
