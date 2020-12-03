@@ -10,11 +10,11 @@ import javax.swing.*;
 @SpringBootApplication
 //@MapperScan
 public class SpringDemoApplication {
-	//日志打印
-	private static final Logger logger = LoggerFactory.getLogger(SpringDemoApplication.class);
+    //日志打印
+    private static final Logger logger = LoggerFactory.getLogger(SpringDemoApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringDemoApplication.class, args);
+    }
 
 }

@@ -1,0 +1,10 @@
+eureka:
+  client:
+    serviceUrl:
+      # ·þÎñserverµÄurl
+      defaultZone: http://127.0.0.1:8762/eureka
+spring:
+  application:
+    name: chenzifeng-spring-cloud-eureka-client-1
+server:
+  port: 8081

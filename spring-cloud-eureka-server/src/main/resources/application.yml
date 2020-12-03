@@ -1,0 +1,16 @@
+
+eureka:
+  client:
+    # 是否将自己注册到eureka-server中，默认为true，但是这是个server端，就不需要了
+    register-with-eureka: false
+    # 是否从eureka-server中获取注册信息，由于是单节点，不需要同步其他数据，这里用false
+    fetch-registry: false
+    serviceUrl:
+     defaultZone: http://127.0.0.1:8080/eureka
+  server:
+    enable-self-preservation: false
+spring:
+  application:
+    name: eureka-server
+server:
+  port: 8762

@@ -22,7 +22,7 @@ public class Record {
     @ManyToOne(optional = false)
     private Student student;
 
-    public Record(Student student,int bookId){
+    public Record(Student student, int bookId) {
         this.student = student;
         this.bookId = bookId;
         this.createAt = System.currentTimeMillis();
@@ -78,6 +78,7 @@ public class Record {
 
     /**
      * 为了防止Student转换为JSon对象时，出现无限包含的关系，设置@JsonBackReference
+     *
      * @param student
      */
     @JsonBackReference

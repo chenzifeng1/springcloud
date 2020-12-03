@@ -17,7 +17,7 @@ public class BookType {
     public BookType() {
     }
 
-    public BookType(String typeName){
+    public BookType(String typeName) {
         this.typeName = typeName;
     }
 

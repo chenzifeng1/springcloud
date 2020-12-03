@@ -15,14 +15,14 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping(path = "/getBookByName",method = RequestMethod.GET)
-    public Object getBookByName(String name){
+    @RequestMapping(path = "/getBookByName", method = RequestMethod.GET)
+    public Object getBookByName(String name) {
         return bookService.findBookByName(name);
     }
 
-    @RequestMapping(path = "/addBook",method = RequestMethod.POST)
-    public Object addBook(String name,String author,int typeId,int num){
-        return bookService.addOne(typeId,num,name,author);
+    @RequestMapping(path = "/addBook", method = RequestMethod.POST)
+    public Object addBook(String name, String author, int typeId, int num) {
+        return bookService.addOne(typeId, num, name, author);
     }
 
 }

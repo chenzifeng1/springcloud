@@ -19,12 +19,14 @@ import java.util.List;
 public interface UserMapper {
     /**
      * 获取所有用户信息
+     *
      * @return
      */
     List<User> findAll();
 
     /**
      * 根据id获取用户信息
+     *
      * @param id
      * @return
      */
@@ -32,6 +34,7 @@ public interface UserMapper {
 
     /**
      * 根据用户名获取用户信息
+     *
      * @param name
      * @return
      */

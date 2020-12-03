@@ -51,12 +51,12 @@ public class User implements Serializable {
     }
 
     public User(String username, String password, String email, String telephone, String headImg) {
-        this(username,password,email,headImg);
+        this(username, password, email, headImg);
         this.telephone = telephone;
     }
 
-    public User(String username, String password, String email, String telephone, String headImg,int status) {
-        this(username,password,email,telephone,headImg);
+    public User(String username, String password, String email, String telephone, String headImg, int status) {
+        this(username, password, email, telephone, headImg);
         this.status = status;
     }
 
@@ -67,7 +67,7 @@ public class User implements Serializable {
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -26,7 +26,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/findOne")
-    public User findUser(JSONObject jsonObject){
+    public User findUser(JSONObject jsonObject) {
         User user = new User();
         return userService.findById(user);
     }

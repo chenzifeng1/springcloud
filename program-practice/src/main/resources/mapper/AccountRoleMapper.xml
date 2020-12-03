@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.czf.program.programpractice.mapper.AccountRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.czf.program.programpractice.entity.AccountRole" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
-    <result column="ACCOUNT_ID" property="accountId" jdbcType="VARCHAR" />
-    <result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, ACCOUNT_ID, ROLE_ID
-  </sql>
-  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from account_role
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteById" parameterType="java.lang.Integer" >
-    delete from account_role
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.czf.program.programpractice.entity.AccountRole" >
-    insert into account_role (ID, ACCOUNT_ID, ROLE_ID
-      )
-    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.czf.program.programpractice.entity.AccountRole" >
-    insert into account_role
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="accountId != null" >
-        ACCOUNT_ID,
-      </if>
-      <if test="roleId != null" >
-        ROLE_ID,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="accountId != null" >
-        #{accountId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.czf.program.programpractice.entity.AccountRole" >
-    update account_role
-    <set >
-      <if test="accountId != null" >
-        ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        ROLE_ID = #{roleId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateById" parameterType="com.czf.program.programpractice.entity.AccountRole" >
-    update account_role
-    set ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
-      ROLE_ID = #{roleId,jdbcType=INTEGER}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.czf.program.programpractice.mapper.AccountRoleMapper">
+    <resultMap id="BaseResultMap" type="com.czf.program.programpractice.entity.AccountRole">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="ACCOUNT_ID" property="accountId" jdbcType="VARCHAR"/>
+        <result column="ROLE_ID" property="roleId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, ACCOUNT_ID, ROLE_ID
+    </sql>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from account_role
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from account_role
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.czf.program.programpractice.entity.AccountRole">
+        insert into account_role (ID, ACCOUNT_ID, ROLE_ID
+        )
+        values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.czf.program.programpractice.entity.AccountRole">
+        insert into account_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="accountId != null">
+                ACCOUNT_ID,
+            </if>
+            <if test="roleId != null">
+                ROLE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="accountId != null">
+                #{accountId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.czf.program.programpractice.entity.AccountRole">
+        update account_role
+        <set>
+            <if test="accountId != null">
+                ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                ROLE_ID = #{roleId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateById" parameterType="com.czf.program.programpractice.entity.AccountRole">
+        update account_role
+        set ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
+        ROLE_ID = #{roleId,jdbcType=INTEGER}
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

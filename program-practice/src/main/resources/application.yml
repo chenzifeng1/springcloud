@@ -7,7 +7,7 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    type: com.alibaba.druid.pool.DruidDataSource
+  #    type: com.alibaba.druid.pool.DruidDataSource
 
   # 当前激活的配置文件是：
   profiles:
@@ -17,3 +17,4 @@ mybatis:
   mapperLocations: classpath*:mapper/**/*.xml
   configuration:
     call-setters-on-nulls: true
+

@@ -8,5 +8,5 @@ package com.chenzifeng.springdemo.util;
  * EXCEPTION:该书处于异常状态
  */
 public enum BookStatusEnum {
-    LEND,ON,OFF,TIMEOUT,EXCEPTION
+    LEND, ON, OFF, TIMEOUT, EXCEPTION
 }

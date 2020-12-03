@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RecordMapper extends CrudRepository<Record,Integer> {
+public interface RecordMapper extends CrudRepository<Record, Integer> {
 }

@@ -18,9 +18,9 @@ public class ConfigController {
 
 
     @GetMapping("/config")
-    public void getConfig(){
-        Map<String,Object> result = new HashMap<>();
-        result.put("port",port);
-       // result.put("profile",env.)
+    public void getConfig() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("port", port);
+        // result.put("profile",env.)
     }
 }

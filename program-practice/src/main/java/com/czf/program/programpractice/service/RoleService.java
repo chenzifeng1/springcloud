@@ -19,13 +19,15 @@ public interface RoleService {
 
     /**
      * 根据id查找role
+     *
      * @param id
      * @return
      */
-    Role findRoleById(@Param(value="id") int id);
+    Role findRoleById(@Param(value = "id") int id);
 
     /**
      * 查找用户所拥有的角色
+     *
      * @param user
      * @return
      */
@@ -33,6 +35,7 @@ public interface RoleService {
 
     /**
      * 增加role
+     *
      * @param role
      * @return 是否添加成功
      */

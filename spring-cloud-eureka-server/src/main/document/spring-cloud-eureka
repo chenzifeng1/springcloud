@@ -1,0 +1,82 @@
+# spring-cloud-eureka
+## 搭建
+### 服务端：eureka-server
+所需要的maven依赖如下：
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+        <version>2.3.4.RELEASE</version>
+    </dependency>
+</dependencies>
+```
+- spring-cloud-starter-netflix-eureka-sever，这个是eureka-server所需要的依赖。
+- spring-boot-starter-actuator，这个是一个探针组件，可以查看服务节点的环境情况，比如流量，启用线程数据等
+
+之后我们需要在我们项目的启动类上加注解 `@EnableEurekaServer`  
+application.yml的配置如下：
+```yaml
+eureka:
+  client:
+    # 是否将自己注册到eureka-server中，默认为true，但是这是个server端，就不需要了
+    register-with-eureka: false
+    # 是否从eureka-server中获取注册信息，由于是单节点，不需要同步其他数据，这里用false
+    fetch-registry: false
+    serviceUrl:
+    #这个地方我得好好研究研究
+     defaultZone: http://127.0.0.1:8080/eureka
+  server:
+    enable-self-preservation: false
+spring:
+  application:
+    name: eureka-server
+server:
+  port: 8762
+```
+然后启动之后访问 [http://127.0.0.1:8762](http://127.0.0.1:8762) 即可查看当前服务节点情况
+ 
+### 客户端：eureka-server
+所需要的maven依赖如下：
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+</dependencies>
+```
+- spring-cloud-starter-netflix-eureka-client，这个是eureka-client所需要的依赖
+- spring-boot-starter-web，不加这个依赖会报错
+
+之后我们需要在客户端的启动类上加注解 `@EnableDiscoveryClient`,当然如果我们的注册中心本身就是Eureka，
+那么我们可以使用`@EnableEurekaClient`  
+application.yml的配置如下
+```yaml
+eureka:
+  client:
+    serviceUrl:
+      # 服务server的url 这里的有坑，不要和server端的defaultZone完全相同，这里是server端服务启动的ip:port
+      defaultZone: http://127.0.0.1:8762/eureka
+spring:
+  application:
+    # 服务名称
+    name: chenzifeng-spring-cloud-eureka-client-1
+server:
+  port: 8081
+```
+
+之后我们可以看一下 [http://127.0.0.1:8762](http://127.0.0.1:8762)
+![注册中心](../img/eureka注册中心.PNG)
+
+当然，其实更建议使用idea自带的创建spring-boot项目的功能来创建项目,可以直接引入依赖，并且自动帮你进行版本之间配置。
+

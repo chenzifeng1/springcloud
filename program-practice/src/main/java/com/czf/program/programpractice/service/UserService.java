@@ -17,12 +17,14 @@ import java.util.List;
 public interface UserService {
     /**
      * 查找所有用户
+     *
      * @return
      */
     List<User> findAll();
 
     /**
      * 根据id查找用户
+     *
      * @param user
      * @return
      */
@@ -30,6 +32,7 @@ public interface UserService {
 
     /**
      * 根据用户名查找
+     *
      * @param user
      * @return
      */

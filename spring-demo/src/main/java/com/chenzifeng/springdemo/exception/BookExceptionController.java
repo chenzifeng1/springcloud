@@ -17,7 +17,7 @@ public class BookExceptionController {
     private static Map<String, Book> bookRepo = new HashMap<>();
 
     @ExceptionHandler(value = BookNotFoundException.class)
-    public ResponseEntity<Object> exception(BookNotFoundException exception){
+    public ResponseEntity<Object> exception(BookNotFoundException exception) {
         return new ResponseEntity<>("book not found", NOT_FOUND);
     }
 }

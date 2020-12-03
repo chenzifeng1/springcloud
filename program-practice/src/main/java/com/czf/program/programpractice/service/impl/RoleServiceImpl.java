@@ -44,6 +44,6 @@ public class RoleServiceImpl implements RoleService {
         if (role == null) {
             throw new IllegalArgumentException("添加角色失败，检查角色信息是否完整");
         }
-        return roleMapper.insert(role)==1;
+        return roleMapper.insert(role) == 1;
     }
 }

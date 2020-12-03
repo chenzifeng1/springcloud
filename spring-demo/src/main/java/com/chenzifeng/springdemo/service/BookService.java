@@ -11,14 +11,13 @@ public class BookService {
     private BookMapper bookDao;
 
 
+    public Book addOne(int typeId, int restNum, String bookName, String author) {
 
-    public Book addOne(int typeId,int restNum,String bookName,String author){
-
-        Book book = new Book(bookName,author,typeId,restNum);
-        return  bookDao.save(book);
+        Book book = new Book(bookName, author, typeId, restNum);
+        return bookDao.save(book);
     }
 
-    public Iterable<Book> findBookByName(String name){
+    public Iterable<Book> findBookByName(String name) {
         return bookDao.findBooksByBookName(name);
     }
 

@@ -5,7 +5,7 @@ import com.chenzifeng.springdemo.util.BookStatusEnum;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "book")
+@Table(name = "book")
 public class Book {
 
     @Id
@@ -23,7 +23,7 @@ public class Book {
     private String author;
 
 
-    public Book(String name,String author,int typeId,int num){
+    public Book(String name, String author, int typeId, int num) {
         this.bookName = name;
         this.author = author;
         this.typeId = typeId;
@@ -80,7 +80,6 @@ public class Book {
 
     public Book() {
     }
-
 
 
 }

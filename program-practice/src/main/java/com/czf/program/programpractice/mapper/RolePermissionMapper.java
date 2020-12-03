@@ -14,6 +14,7 @@ import com.czf.program.programpractice.entity.RolePermission;
 public interface RolePermissionMapper {
     /**
      * 根据主键删除
+     *
      * @param id
      * @return
      */
@@ -21,6 +22,7 @@ public interface RolePermissionMapper {
 
     /**
      * 插入关联
+     *
      * @param record
      * @return
      */
@@ -28,6 +30,7 @@ public interface RolePermissionMapper {
 
     /**
      * 选择性插入
+     *
      * @param record
      * @return
      */
@@ -35,6 +38,7 @@ public interface RolePermissionMapper {
 
     /**
      * 根据主键查找
+     *
      * @param id
      * @return
      */
@@ -42,6 +46,7 @@ public interface RolePermissionMapper {
 
     /**
      * 根据条件查询
+     *
      * @param record
      * @return
      */
@@ -49,6 +54,7 @@ public interface RolePermissionMapper {
 
     /**
      * 根据主键更新
+     *
      * @param record
      * @return
      */

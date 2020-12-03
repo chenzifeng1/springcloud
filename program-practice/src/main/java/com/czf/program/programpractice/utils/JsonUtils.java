@@ -21,7 +21,7 @@ import java.util.Enumeration;
 public class JsonUtils {
     private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
-    public static <T> T jsonToObject(JSONObject jsonObject,Class<T> clazz){
+    public static <T> T jsonToObject(JSONObject jsonObject, Class<T> clazz) {
         try {
             T t = clazz.newInstance();
             for (Field field : clazz.getDeclaredFields()) {
@@ -31,10 +31,10 @@ public class JsonUtils {
             }
             return t;
         } catch (InstantiationException e) {
-            logger.error("json对象实例化失败",e);
+            logger.error("json对象实例化失败", e);
         } catch (IllegalAccessException e) {
-            logger.error("json对象转换失败",e);
-        }catch (ClassCastException e){
+            logger.error("json对象转换失败", e);
+        } catch (ClassCastException e) {
 
         }
 

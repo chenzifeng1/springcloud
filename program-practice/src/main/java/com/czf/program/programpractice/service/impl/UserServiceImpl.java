@@ -29,9 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(User user) {
-        if(user!=null){
+        if (user != null) {
             return userMapper.findOneById(user.getId());
-        }else {
+        } else {
             return null;
         }
     }

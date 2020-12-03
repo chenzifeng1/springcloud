@@ -17,6 +17,7 @@ import java.util.List;
 public interface RoleMapper {
     /**
      * 根据主键删除
+     *
      * @param id
      * @return
      */
@@ -24,6 +25,7 @@ public interface RoleMapper {
 
     /**
      * 插入Role
+     *
      * @param record
      * @return
      */
@@ -31,6 +33,7 @@ public interface RoleMapper {
 
     /**
      * 属性有选择的插入
+     *
      * @param record
      * @return
      */
@@ -38,6 +41,7 @@ public interface RoleMapper {
 
     /**
      * 根据主键id选择
+     *
      * @param id
      * @return
      */
@@ -45,6 +49,7 @@ public interface RoleMapper {
 
     /**
      * 根据role的属性进行更新
+     *
      * @param record
      * @return
      */
@@ -52,6 +57,7 @@ public interface RoleMapper {
 
     /**
      * 根据id进行更新
+     *
      * @param record
      * @return
      */
@@ -59,6 +65,7 @@ public interface RoleMapper {
 
     /**
      * 查询用户的角色
+     *
      * @param user
      * @return
      */
