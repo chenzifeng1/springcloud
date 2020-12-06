@@ -1,16 +1,22 @@
+#
+#eureka:
+#  client:
+#    # æ˜¯å¦å°†è‡ªå·±æ³¨å†Œåˆ°EurekaæœåŠ¡æ³¨å†Œä¸­å¿ƒä¸Š
+#    register-with-eureka: false
+#    # æ˜¯å¦ä»Eurekaä¸Šæ‹‰å–æœåŠ¡æ³¨å†Œä¿¡æ¯
+#    fetch-registry: false
+#    serviceUrl:
+#     defaultZone: http://127.0.0.1:8080/eureka
+#  server:
+#    enable-self-preservation: false
+#spring:
+#  application:
+#    name: eureka-server
+#server:
+    #  port: 8762
 
-eureka:
-  client:
-    # ÊÇ·ñ½«×Ô¼º×¢²áµ½eureka-serverÖĞ£¬Ä¬ÈÏÎªtrue£¬µ«ÊÇÕâÊÇ¸öserver¶Ë£¬¾Í²»ĞèÒªÁË
-    register-with-eureka: false
-    # ÊÇ·ñ´Óeureka-serverÖĞ»ñÈ¡×¢²áĞÅÏ¢£¬ÓÉÓÚÊÇµ¥½Úµã£¬²»ĞèÒªÍ¬²½ÆäËûÊı¾İ£¬ÕâÀïÓÃfalse
-    fetch-registry: false
-    serviceUrl:
-     defaultZone: http://127.0.0.1:8080/eureka
-  server:
-    enable-self-preservation: false
 spring:
+  profiles:
+    active: erk2
   application:
-    name: eureka-server
-server:
-  port: 8762
+    name: EurekaServer

@@ -1,7 +1,7 @@
 eureka:
   client:
     serviceUrl:
-      # ·şÎñserverµÄurl
+      # æœåŠ¡ä¸­å¿ƒåœ°å€
       defaultZone: http://127.0.0.1:8762/eureka
 spring:
   application:

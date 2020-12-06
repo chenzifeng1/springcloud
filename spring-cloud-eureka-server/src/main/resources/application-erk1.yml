@@ -1,0 +1,10 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://erk2.com:7002/eruaka
+#    register-with-eureka: false
+#    fetch-registry: false
+  instance:
+    hostname: erk1.com
+server:
+  port: 7001
