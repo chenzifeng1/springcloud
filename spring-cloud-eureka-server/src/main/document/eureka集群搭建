@@ -1,0 +1,44 @@
+# 高可用的Eureka服务注册中心搭建
+Eureka作为服务注册中心，如果只有一个注册中心的节点，那么当这个节点挂掉之后，如果由服务地址发生变化了
+那么会导致其他服务获取不到相应的服务地址。因此我们可以配置多个Eureka的注册中心来作为副本，当一个Eureka注册中心
+挂掉之后，其他的副本还可以继续提供服务。
+
+## 配置
+首先我们可以通过不同配置文件来配置不同的服务注册中心，比如我们可以创建两个配置文件：
+`application-erk1.yml`,`application-erk2.yml`。配置信息如下  
+- erk1:
+    ```yaml
+    eureka:
+      client:
+        service-url:
+          defaultZone: http://erk2.com:7002/eruaka
+      instance:
+        hostname: erk1.com
+    server:
+      port: 7001
+    ```
+
+- erk2:
+    ```yaml
+    eureka:
+      client:
+        service-url:
+          defaultZone: http://erk1.com:7001/eruaka
+      instance:
+        hostname: erk1.com
+    server:
+      port: 7002
+    ```
+
+这里有个属性：`eureka.instance.hostname` 是标记服务节点的主机名的，用来查询主机ip。
+我们在`application.yml`的配置如下:
+```yaml
+    spring:
+      profiles:
+        active: erk1
+      application:
+        name: EurekaServer
+```
+ 通过激活不同的配置文件，来启用多个不同实例。`application.name`是标志服务名称的，这里我们统一处理，表示多个服务注册中心的节点是
+ 同一个服务的副本。
+ 

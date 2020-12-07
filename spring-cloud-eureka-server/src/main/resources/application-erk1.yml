@@ -1,10 +1,10 @@
+#    hostname：用来查找主机地址 appname：表示服务分组
 eureka:
   client:
     service-url:
-      defaultZone: http://erk2.com:7002/eruaka
-#    register-with-eureka: false
-#    fetch-registry: false
+      defaultZone: http://erk2.com:7002/eureka
   instance:
     hostname: erk1.com
 server:
   port: 7001
+
