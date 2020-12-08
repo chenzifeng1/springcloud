@@ -1,0 +1,9 @@
+server:
+  port: 8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://erk2.com:7002/eureka
+  instance:
+    hostname: eureka-cosumer
+    appname: consumer
