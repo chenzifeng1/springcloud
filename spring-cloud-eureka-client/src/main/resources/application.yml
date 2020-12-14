@@ -4,15 +4,30 @@ eureka:
       # 服务中心地址
       defaultZone: http://erk2.com:7002/eureka
     # eureka client 拉取服务注册信息的时间间隔，默认30s
+    healthcheck:
+      # 可以上报服务的真实健康状态
+      enabled: true
     # 对于api-gateway，如果需要迅速获取服务注册状态，可以减小该值
-    registry-fetch-interval-seconds: 25
+    registry-fetch-interval-seconds: 30
+
   instance:
     # 续约（心跳）发送间隔时间，默认30s
-    lease-renewal-interval-in-seconds: 25
+    lease-renewal-interval-in-seconds: 30
     # 续约到期时间，默认90s
-    lease-expiration-duration-in-seconds: 60
+    lease-expiration-duration-in-seconds: 90
 spring:
   application:
     name: chenzifeng-spring-cloud-eureka-client-1
 server:
   port: 8081
+
+management:
+  endpoint:
+    shutdown:
+      # 可以远程关闭微服务的节点
+      enabled: true
+
+#  endpoints:
+#    web:
+#      exposure:
+#        include: *
