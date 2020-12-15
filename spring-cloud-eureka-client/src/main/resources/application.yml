@@ -19,7 +19,7 @@ spring:
   application:
     name: chenzifeng-spring-cloud-eureka-client-1
 server:
-  port: 8081
+  port: 8080
 
 management:
   endpoint:

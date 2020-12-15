@@ -20,6 +20,11 @@ spring:
     active: erk2
   application:
     name: EurekaServer
+  security:
+    user:
+      name: czf
+      password: 123456
+
 eureka:
   server:
     # 是否开启自我保护模式

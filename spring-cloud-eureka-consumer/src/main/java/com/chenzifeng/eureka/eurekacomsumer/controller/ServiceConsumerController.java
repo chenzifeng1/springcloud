@@ -41,12 +41,10 @@ public class ServiceConsumerController {
     @Autowired
     private LoadBalancerClient lbc;
 
+    @Autowired
+    RestTemplate restTemplate;
 
-    @LoadBalanced
-    @Bean
-    public RestTemplate restTemplateInstance(){
-        return new RestTemplate();
-    }
+
 
 
     /**
@@ -87,9 +85,11 @@ public class ServiceConsumerController {
      */
     @GetMapping("/hi1")
     public Object getHi1() {
-        ServiceInstance instance = lbc.choose("CHENZIFENG-SPRING-CLOUD-EUREKA-CLIENT-1");
-        String address = "http://" + instance.getHost() + ":" + instance.getPort() + "/user/getHi";
-        RestTemplate template = new RestTemplate();
-        return template.getForObject(address, String.class);
+        ServiceInstance instance = lbc.choose("eureka-provider");
+        if(instance==null){
+            return "未发现服务";
+        }
+        String address = "http://" + instance.getHost() + ":" + instance.getPort() + "/service-help/port";
+        return restTemplate.getForObject(address, String.class)+" port:"+instance.getPort();
     }
 }
