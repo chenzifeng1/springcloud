@@ -31,3 +31,11 @@ eureka:
     enable-self-preservation: true
     # 失效服务器间隔
     eviction-interval-timer-in-ms: 3000
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'

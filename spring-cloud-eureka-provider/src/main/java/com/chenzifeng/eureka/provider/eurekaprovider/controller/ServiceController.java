@@ -1,11 +1,13 @@
 package com.chenzifeng.eureka.provider.eurekaprovider.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @ProjectName: eureka-provider
@@ -20,12 +22,20 @@ import java.util.List;
 @RequestMapping("/service-help")
 public class ServiceController {
 
-    public static List<String> serviceNames = new ArrayList<>();
+    public static ConcurrentMap<String,Integer> consumerRequestTime = new ConcurrentHashMap<>();
+
+
+    @Value("${server.port}")
+    private String port;
+
 
     @GetMapping("/port")
-    public String getServiceName(){
-        serviceNames.add("hello-world");
-        return serviceNames.toString();
-
+    public String getServiceName(@RequestParam("consumer")String consumer) {
+        if(!consumerRequestTime.containsKey(consumer)){
+            consumerRequestTime.put(consumer,1);
+        }else {
+            consumerRequestTime.put(consumer,consumerRequestTime.get(consumer)+1);
+        }
+        return "访问者："+consumer+" 访问次数："+consumerRequestTime.get(consumer) + " port:"+port;
     }
 }

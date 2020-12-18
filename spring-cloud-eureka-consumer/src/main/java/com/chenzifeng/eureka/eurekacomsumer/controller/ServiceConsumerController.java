@@ -5,11 +5,10 @@ import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,6 +36,7 @@ public class ServiceConsumerController {
     @Qualifier("eurekaClient")
     @Autowired
     private EurekaClient eurekaClient;
+
 
     @Autowired
     private LoadBalancerClient lbc;
@@ -85,11 +85,19 @@ public class ServiceConsumerController {
      */
     @GetMapping("/hi1")
     public Object getHi1() {
-        ServiceInstance instance = lbc.choose("eureka-provider");
+        ServiceInstance instance = lbc.choose("provider");
         if(instance==null){
-            return "未发现服务";
+            return "No servers available for service: ";
         }
         String address = "http://" + instance.getHost() + ":" + instance.getPort() + "/service-help/port";
         return restTemplate.getForObject(address, String.class)+" port:"+instance.getPort();
+    }
+
+
+    @GetMapping("/hi2")
+    public Object getHi2(@RequestParam("consumer")String consumer) {
+        // http://服务名[spring.application.name]/资源名[请求url]
+        String address = "http://provider/service-help/port?consumer={1}";
+        return restTemplate.getForObject(address, String.class,consumer);
     }
 }

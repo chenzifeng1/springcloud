@@ -1,16 +1,29 @@
 server:
-  port: 8083
+  port: 8084
 eureka:
   client:
     service-url:
       defaultZone: http://erk2.com:7002/eureka
     healthcheck:
-      # ÔÊĞíÉÏ´«½¡¿µ×´Ì¬
+      # æ˜¯å¦è®¾ç½®å¥åº·æ£€æŸ¥
       enabled: true
   instance:
-    hostname: eureka-provider-2
-    appname: eureka-provider
+    hostname: eureka-provider
 management:
   endpoint:
     shutdown:
       enabled: true
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: ['health','env','info']
+info:
+  app:
+    name: eureka-provider
+    version: 1.0.0
+    description: æµ‹è¯•
+spring:
+  application:
+    name: provider

@@ -42,6 +42,12 @@ Eureka作为服务注册中心，如果只有一个注册中心的节点，那�
  通过激活不同的配置文件，来启用多个不同实例。`application.name`是标志服务名称的，这里我们统一处理，表示多个服务注册中心的节点是
  同一个服务的副本。
  
+ ## Eureka服务注册方式
+ 在学习过程中遇到了一个问题，我配置了`actuator`，但是在eureka-server的监控页面访问，却无法访问到服务节点的actuator监控信息。
+ 我的服务节点配置了`eureka.instance.hostname=provider`,然后访问的时候eureka就会根据配置对 `provider`这个主机名进行访问，但是由于我没有做主机名和ip地址的映射。
+ 调用服务时无法根据主机名找到对应的ip进行服务调用，因此无法查看 `provider:port/actuator/info`的信息，去掉`hostname`这个配置之后可以正常访问。  
+  eureka默认的服务注册方式是 ip+port+服务名。我们可以通过指定实例的hostname来通过主机名+端口+服务名访问。
  ## Ribbon做软负载均衡
+ 
  
  
