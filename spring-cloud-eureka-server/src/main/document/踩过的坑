@@ -1,0 +1,9 @@
+# SpringCloud-Eureka学习中踩过的坑
+1. 根据服务名调用，显示该服务无对应实例，当初`application.yml`配置的是`eureka.instance.appName: serviceName`。但根据这个服务名
+来调用服务就是无法找到对应的服务实例。后来将配置改为`spring.application.name: serviceName`才找到了对应的服务。原因有时间细究。
+
+2. 关于Openfeign调用Api时的请求转换问题：  
+    现象是consumer在使用Openfeign调用provider的服务时，报了405错误，原因是请求方法错误。在provider这边暴露的接口是get方法，Openfeign调用的方法也是get方法。
+    只不过是携带了一个int型的参数。provider这边日志看出consumer是以post请求来访问接口的，问题就是Openfeign在执行服务调用时改变了请求方式。
+    原因：Openfeign底层使用Http
+    

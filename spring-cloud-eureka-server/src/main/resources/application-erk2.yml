@@ -10,5 +10,7 @@ eureka:
   # 自定义标签
   metadata-map:
       creater: chenzifeng
+  server:
+    enable-self-preservation: false
 server:
   port: 7002
