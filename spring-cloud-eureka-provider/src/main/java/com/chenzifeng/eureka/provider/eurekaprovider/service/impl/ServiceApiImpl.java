@@ -21,6 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class ServiceApiImpl implements ProviderConsumeApi {
 
+
     private static final Map<Integer,UserAccount> userMap = new ConcurrentHashMap<>();
 
     /**
@@ -44,5 +45,15 @@ public class ServiceApiImpl implements ProviderConsumeApi {
             users.add(user);
         });
         return users;
+    }
+
+    @Override
+    public String addUser(UserAccount user) {
+        if(userMap.containsKey(user.getId())){
+            return "用户信息已存在";
+        }else {
+            userMap.put(user.getId(),user);
+            return "添加成功";
+        }
     }
 }

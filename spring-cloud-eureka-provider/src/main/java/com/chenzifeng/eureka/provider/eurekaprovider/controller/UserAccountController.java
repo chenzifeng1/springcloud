@@ -24,8 +24,8 @@ public class UserAccountController {
     @Autowired
     ProviderConsumeApi userAccountService;
 
-    @PostMapping("/getUserById")
-    public UserAccount getUserInfo(@RequestBody Integer userId){
+    @GetMapping("/getUserById")
+    public UserAccount getUserInfo(Integer userId){
         log.info("请求id："+userId);
         return userAccountService.getUserInfo(userId);
     }
@@ -38,6 +38,14 @@ public class UserAccountController {
     @GetMapping("/getFirstUser")
     public UserAccount getFirstUser(){
         return userAccountService.getUserInfo(1);
+    }
+
+    @PostMapping("/add")
+    public String addUserAccount(@RequestBody UserAccount userAccount){
+        if(userAccount==null){
+            return "用户信息错误";
+        }
+        return userAccountService.addUser(userAccount);
     }
 
 }

@@ -39,4 +39,9 @@ public class OpenFeignServiceConsumerController {
     public UserAccount getFirstAccount(){
         return serviceApi.getFirstUser();
     }
+
+    @GetMapping("/addUser")
+    public String addUserAccount(Integer id,String name,Integer status,String email){
+        return serviceApi.addUser(new UserAccount(id,name,status,email));
+    }
 }

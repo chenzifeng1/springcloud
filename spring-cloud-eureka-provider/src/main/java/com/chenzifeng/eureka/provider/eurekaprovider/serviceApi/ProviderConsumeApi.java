@@ -28,4 +28,11 @@ public interface ProviderConsumeApi  {
      */
     List<UserAccount> getUserIdList();
 
+    /**
+     * 增加用户信息
+     * @param user
+     * @return
+     */
+    String addUser(UserAccount user);
+
 }
