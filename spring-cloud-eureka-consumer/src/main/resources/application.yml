@@ -6,3 +6,14 @@ eureka:
       defaultZone: http://erk2.com:7002/eureka
   instance:
     appname: consumer
+ribbon:
+  # 连接超时时间（ms）
+  ConnectTimeout: 1000
+  # 业务逻辑超时时间
+  ReadTimeout: 2000
+  # 最大自动重试次数 不包含首次调用
+  MaxAutoRetries: 2
+  # 重试负载均衡其他实例的最大重试次数，不包括首次调用
+  MaxAutoRetriesNextServer: 1
+  # 是否所有操作都重试
+  OkToRetryOnAllOperations: false

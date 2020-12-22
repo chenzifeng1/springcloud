@@ -1,10 +1,7 @@
 package com.chenzifeng.eureka.eurekacomsumer.controller.openfeign;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,7 @@ import java.util.List;
  * @Version: 1.0
  */
 @FeignClient(name = "provider")
+@RequestMapping("/userAccount")
 public interface ServiceApi {
 
     /**
@@ -25,21 +23,21 @@ public interface ServiceApi {
      * @param userId
      * @return
      */
-    @GetMapping("/userAccount/getUserById")
+    @GetMapping("/getUserById")
     UserAccount getUserInfo(@RequestParam("userId") Integer userId);
 
     /**
      * 获取当前用户列表
      * @return
      */
-    @PostMapping("/userAccount/getUserList")
+    @PostMapping("/getUserList")
     List<UserAccount> getUserIdList();
 
     /**
      * 获取第一个用户信息
      * @return
      */
-    @GetMapping("/userAccount/getFirstUser")
+    @GetMapping("/getFirstUser")
     UserAccount getFirstUser();
 
     /**
@@ -47,6 +45,6 @@ public interface ServiceApi {
      * @param user
      * @return
      */
-    @PostMapping("/userAccount/add")
+    @PostMapping("/add")
     String addUser(@RequestBody UserAccount user);
 }
