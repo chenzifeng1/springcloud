@@ -17,6 +17,7 @@ public class UserAccount {
     private String accountName;
     private int accountStatus;
     private String email;
+    private static volatile UserAccount userAccount;
 
     public static String emailFormat = "testUser%1$s@qq.com";
 
@@ -28,5 +29,21 @@ public class UserAccount {
     }
 
     public UserAccount() {
+    }
+
+    /**
+     * 处理降级返回的信息
+     * @return
+     */
+    public static UserAccount getInstanceAccount(){
+        if(userAccount==null){
+            synchronized (UserAccount.class){
+                if(userAccount==null){
+                    userAccount = new UserAccount(-1,"降级处理User",-1,"777777@gmail");
+                }
+            }
+
+        }
+        return userAccount;
     }
 }

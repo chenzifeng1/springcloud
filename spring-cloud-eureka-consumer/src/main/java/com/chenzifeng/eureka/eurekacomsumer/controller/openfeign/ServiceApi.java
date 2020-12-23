@@ -14,7 +14,7 @@ import java.util.List;
  * @Date: 2020/12/21 10:20
  * @Version: 1.0
  */
-@FeignClient(name = "provider")
+@FeignClient(name = "provider",fallback = ServiceRemoteHystrix.class)
 @RequestMapping("/userAccount")
 public interface ServiceApi {
 
