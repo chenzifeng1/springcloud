@@ -38,7 +38,7 @@ public class UserAccountController {
     @PostMapping("/getUserList")
     public List<UserAccount> getUserIdList() {
         try {
-            TimeUnit.SECONDS.sleep(4);
+            TimeUnit.SECONDS.sleep(20);
         } catch (InterruptedException e) {
             log.error("线程中断异常",e);
         }

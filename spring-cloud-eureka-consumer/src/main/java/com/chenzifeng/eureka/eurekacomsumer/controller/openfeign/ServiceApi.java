@@ -14,8 +14,7 @@ import java.util.List;
  * @Date: 2020/12/21 10:20
  * @Version: 1.0
  */
-@FeignClient(name = "provider",fallback = ServiceRemoteHystrix.class)
-@RequestMapping("/userAccount")
+@FeignClient(name = "provider",fallback = HystrixDowngradeService.class)
 public interface ServiceApi {
 
     /**
@@ -23,21 +22,22 @@ public interface ServiceApi {
      * @param userId
      * @return
      */
-    @GetMapping("/getUserById")
+
+    @GetMapping("/userAccount/getUserById")
     UserAccount getUserInfo(@RequestParam("userId") Integer userId);
 
     /**
      * 获取当前用户列表
      * @return
      */
-    @PostMapping("/getUserList")
+    @PostMapping("/userAccount/getUserList")
     List<UserAccount> getUserIdList();
 
     /**
      * 获取第一个用户信息
      * @return
      */
-    @GetMapping("/getFirstUser")
+    @GetMapping("/userAccount/getFirstUser")
     UserAccount getFirstUser();
 
     /**
@@ -45,6 +45,6 @@ public interface ServiceApi {
      * @param user
      * @return
      */
-    @PostMapping("/add")
+    @PostMapping("/userAccount/add")
     String addUser(@RequestBody UserAccount user);
 }
