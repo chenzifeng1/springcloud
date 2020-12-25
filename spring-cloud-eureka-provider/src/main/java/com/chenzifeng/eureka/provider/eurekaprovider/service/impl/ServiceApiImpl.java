@@ -56,4 +56,10 @@ public class ServiceApiImpl implements ProviderConsumeApi {
             return "添加成功";
         }
     }
+
+    @Override
+    public String exceptionRequestTest() {
+        int i = 1/0;
+        return "出现异常";
+    }
 }

@@ -1,5 +1,7 @@
 package com.chenzifeng.eureka.eurekacomsumer.controller.openfeign;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.List;
  * @Date: 2020/12/24 19:38
  * @Version: 1.0
  */
-
+@Slf4j
 @Component
 public class HystrixDowngradeService implements ServiceApi {
     @Override
@@ -37,5 +39,10 @@ public class HystrixDowngradeService implements ServiceApi {
     @Override
     public String addUser(UserAccount user) {
         return "暂时无法添加信息";
+    }
+
+    @Override
+    public String exceptionRequestTest() {
+        return "服务异常，请稍后尝试";
     }
 }

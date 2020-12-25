@@ -14,15 +14,13 @@ import java.util.List;
  * @Date: 2020/12/21 10:20
  * @Version: 1.0
  */
-@FeignClient(name = "provider",fallback = HystrixDowngradeService.class)
+@FeignClient(contextId = "serviceApi",name = "provider",fallback = HystrixDowngradeService.class)
 public interface ServiceApi {
-
     /**
      * 根据用户id获取用户信息
      * @param userId
      * @return
      */
-
     @GetMapping("/userAccount/getUserById")
     UserAccount getUserInfo(@RequestParam("userId") Integer userId);
 
@@ -47,4 +45,11 @@ public interface ServiceApi {
      */
     @PostMapping("/userAccount/add")
     String addUser(@RequestBody UserAccount user);
+
+    /**
+     * 服务异常测试方法
+     * @return
+     */
+    @GetMapping("/userAccount/exception")
+    String exceptionRequestTest();
 }

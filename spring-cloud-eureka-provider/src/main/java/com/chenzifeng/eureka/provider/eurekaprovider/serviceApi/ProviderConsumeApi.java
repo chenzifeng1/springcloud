@@ -35,4 +35,10 @@ public interface ProviderConsumeApi  {
      */
     String addUser(UserAccount user);
 
+    /**
+     * 异常测试类
+     * @return
+     */
+    String exceptionRequestTest();
+
 }

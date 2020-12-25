@@ -18,10 +18,17 @@ eureka:
 #  # 是否所有操作都重试
 #  OkToRetryOnAllOperations: false
 
-  # 开启hystrix
 feign:
+  # 开启hystrix
   hystrix:
     enabled: true
+  client:
+    config:
+      default:
+        connncetTime: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
 #  httpclient:
 #    connection-timer-repeat: 6
 #    connection-timeout: 2

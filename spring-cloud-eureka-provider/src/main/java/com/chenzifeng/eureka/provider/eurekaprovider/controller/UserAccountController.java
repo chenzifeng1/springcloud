@@ -37,11 +37,6 @@ public class UserAccountController {
 
     @PostMapping("/getUserList")
     public List<UserAccount> getUserIdList() {
-        try {
-            TimeUnit.SECONDS.sleep(20);
-        } catch (InterruptedException e) {
-            log.error("线程中断异常",e);
-        }
         log.info(String.format("请求用户列表,请求服务节点端口：%1$s",port));
         return userAccountService.getUserIdList();
     }
@@ -61,4 +56,9 @@ public class UserAccountController {
         return userAccountService.addUser(userAccount);
     }
 
+    @GetMapping("/exception")
+    public String exceptionRequestTest(){
+        log.info("服务异常测试");
+        return userAccountService.exceptionRequestTest();
+    }
 }

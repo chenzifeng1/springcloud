@@ -1,5 +1,6 @@
 package com.chenzifeng.eureka.eurekacomsumer.controller.openfeign;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +18,12 @@ import java.util.List;
  * @Date: 2020/12/21 9:55
  * @Version: 1.0
  */
+@Slf4j
 @RestController
 @RequestMapping("/accountConsumer")
 public class OpenFeignServiceConsumerController {
 
-    @Autowired(required = false)
+    @Autowired
     private ServiceApi serviceApi;
 
     @GetMapping("/getAccountById")
@@ -31,9 +33,9 @@ public class OpenFeignServiceConsumerController {
 
     @GetMapping("/getAccountList")
     public List<UserAccount> getUserAccounts(){
+        log.info("请求获取用户列表");
         return serviceApi.getUserIdList();
     }
-
 
     @GetMapping("/getFirst")
     public UserAccount getFirstAccount(){
@@ -43,5 +45,10 @@ public class OpenFeignServiceConsumerController {
     @GetMapping("/addUser")
     public String addUserAccount(Integer id,String name,Integer status,String email){
         return serviceApi.addUser(new UserAccount(id,name,status,email));
+    }
+
+    @GetMapping("/e")
+    public String exceptionTest(){
+        return serviceApi.exceptionRequestTest();
     }
 }

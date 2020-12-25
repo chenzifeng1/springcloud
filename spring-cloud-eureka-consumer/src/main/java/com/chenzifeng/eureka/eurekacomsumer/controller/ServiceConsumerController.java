@@ -38,8 +38,6 @@ public class ServiceConsumerController {
     private EurekaClient eurekaClient;
 
 
-
-
     @Autowired
     private LoadBalancerClient lbc;
 
