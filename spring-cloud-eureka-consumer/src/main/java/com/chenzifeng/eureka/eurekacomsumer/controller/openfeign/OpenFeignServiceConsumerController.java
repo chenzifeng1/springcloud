@@ -1,5 +1,6 @@
 package com.chenzifeng.eureka.eurekacomsumer.controller.openfeign;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,29 +27,36 @@ public class OpenFeignServiceConsumerController {
     @Autowired
     private ServiceApi serviceApi;
 
+
+
+    @Autowired
+    private FeignService feignService;
+
+    @GetMapping("/e")
+    public String exceptionTest(){
+        return feignService.exceptionRequestTest();
+    }
+
     @GetMapping("/getAccountById")
     public UserAccount getUserAccount(@RequestParam("userId")Integer id){
-        return serviceApi.getUserInfo(id);
+        return feignService.getUserInfo(id);
     }
 
     @GetMapping("/getAccountList")
     public List<UserAccount> getUserAccounts(){
         log.info("请求获取用户列表");
-        return serviceApi.getUserIdList();
+        return feignService.getUserIdList();
     }
 
     @GetMapping("/getFirst")
     public UserAccount getFirstAccount(){
-        return serviceApi.getFirstUser();
+        return feignService.getFirstUser();
     }
 
     @GetMapping("/addUser")
     public String addUserAccount(Integer id,String name,Integer status,String email){
-        return serviceApi.addUser(new UserAccount(id,name,status,email));
+        return feignService.addUser(new UserAccount(id,name,status,email));
     }
 
-    @GetMapping("/e")
-    public String exceptionTest(){
-        return serviceApi.exceptionRequestTest();
-    }
+
 }

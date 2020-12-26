@@ -31,4 +31,9 @@ feign:
 
 #  httpclient:
 #    connection-timer-repeat: 6
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 #    connection-timeout: 2

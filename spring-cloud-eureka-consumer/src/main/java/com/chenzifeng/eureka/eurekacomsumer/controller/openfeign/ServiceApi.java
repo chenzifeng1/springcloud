@@ -1,5 +1,6 @@
 package com.chenzifeng.eureka.eurekacomsumer.controller.openfeign;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,8 @@ import java.util.List;
  * @Date: 2020/12/21 10:20
  * @Version: 1.0
  */
-@FeignClient(contextId = "serviceApi",name = "provider",fallback = HystrixDowngradeService.class)
+//@FeignClient(contextId = "serviceApi",name = "provider",fallback = HystrixDowngradeService.class)
+@FeignClient(contextId = "serviceApi",name = "provider",fallbackFactory = HystrixDowngradeService.class)
 public interface ServiceApi {
     /**
      * 根据用户id获取用户信息
@@ -52,4 +54,5 @@ public interface ServiceApi {
      */
     @GetMapping("/userAccount/exception")
     String exceptionRequestTest();
+
 }
