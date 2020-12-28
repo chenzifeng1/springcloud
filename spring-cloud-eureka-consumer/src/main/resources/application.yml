@@ -37,3 +37,8 @@ management:
       exposure:
         include: "*"
 #    connection-timeout: 2
+info:
+  app:
+    name: eureka-consumer
+    version: 1.0.0
+    description: 测试

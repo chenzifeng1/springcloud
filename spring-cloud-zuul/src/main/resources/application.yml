@@ -1,0 +1,31 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://erk2.com:7002/eureka
+  instance:
+    instance-id: online-zuul
+    hostname: localhost
+info:
+  app:
+    name: online-zuul
+    version: 1.0.0
+    description: "网关"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    routes:
+      enabled: true
+api-driver:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

@@ -1,7 +1,6 @@
 eureka:
   client:
     service-url:
-#      defaultZone: http://erk1.com:7001/eureka
       defaultZone: http://erk2.com:7002/eureka
     register-with-eureka: false
     fetch-registry: false
