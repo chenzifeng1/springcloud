@@ -9,6 +9,7 @@ eureka:
       enabled: true
   instance:
     hostname: eureka-provider
+    instance-id: provider-ins-1
 management:
   endpoint:
     shutdown:
@@ -27,3 +28,6 @@ info:
 spring:
   application:
     name: provider
+ribbon:
+  eureka:
+    enabled: true

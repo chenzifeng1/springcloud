@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @Version: 1.0
  */
 @RestController
-@RequestMapping("/userAccount")
+    @RequestMapping("/userAccount")
 @Slf4j
 public class UserAccountController {
     @Autowired

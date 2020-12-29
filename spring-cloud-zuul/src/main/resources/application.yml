@@ -3,6 +3,7 @@ server:
 spring:
   application:
     name: zuul
+
 eureka:
   client:
     service-url:
@@ -10,22 +11,42 @@ eureka:
   instance:
     instance-id: online-zuul
     hostname: localhost
+
 info:
   app:
     name: online-zuul
     version: 1.0.0
     description: "网关"
+    routes: "${eureka.instance.hostname}:${server.port}/actuator/routes"
+
+# actuator的监测信息 endpoint是端点信息 端点是指监测的指标
 management:
   endpoints:
     web:
       exposure:
+        # 包含的端点信息:
         include: "*"
   endpoint:
     health:
+      # 是否显示细节
       show-details: always
       enabled: true
     routes:
       enabled: true
-api-driver:
+# 调用provider服务时使用的负载均衡策略
+provider:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+# zuul的超时信息
+zuul:
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+  routes:
+    # 手动配置访问路径与服务地址的映射
+    provider:
+      path: /eureka-provider/**
+      url: http://eureka-provider:8084/
+    consumer:
+      path: /eureka-consumer/**
+      url: http://26.26.26.1:8082/

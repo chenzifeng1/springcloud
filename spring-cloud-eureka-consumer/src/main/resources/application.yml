@@ -6,6 +6,7 @@ eureka:
       defaultZone: http://erk2.com:7002/eureka
   instance:
     appname: consumer
+    instance-id: consumer-ins-1
 #ribbon:
 #  # 连接超时时间（ms）
 #  ConnectTimeout: 1000
