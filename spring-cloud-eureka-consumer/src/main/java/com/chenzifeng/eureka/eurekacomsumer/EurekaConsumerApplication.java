@@ -29,7 +29,6 @@ public class EurekaConsumerApplication {
         SpringApplication.run(EurekaConsumerApplication.class, args);
     }
 
-
     @Bean
     @LoadBalanced
     public RestTemplate getRestTemplateInstance(){

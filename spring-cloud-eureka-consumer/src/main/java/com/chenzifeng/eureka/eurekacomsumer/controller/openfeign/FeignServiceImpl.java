@@ -22,17 +22,11 @@ public class FeignServiceImpl implements FeignService{
     @Autowired
     private ServiceApi serviceApi;
 
-
     @Override
     @HystrixCommand(fallbackMethod = "ert")
     public String exceptionRequestTest() {
         return serviceApi.exceptionRequestTest();
     }
-
-    public String ert(){
-        return "ert error";
-    }
-
 
     @Override
     public UserAccount getUserInfo(Integer userId) {
@@ -44,8 +38,6 @@ public class FeignServiceImpl implements FeignService{
         return serviceApi.getUserIdList();
     }
 
-
-
     @Override
     public UserAccount getFirstUser() {
         return serviceApi.getFirstUser();
@@ -56,5 +48,8 @@ public class FeignServiceImpl implements FeignService{
         return serviceApi.addUser(user);
     }
 
+    public String ert(){
+        return "ert error";
+    }
 
 }

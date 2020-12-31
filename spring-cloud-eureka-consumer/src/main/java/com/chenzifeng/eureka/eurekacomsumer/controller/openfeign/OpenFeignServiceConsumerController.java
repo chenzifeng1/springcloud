@@ -34,7 +34,7 @@ public class OpenFeignServiceConsumerController {
 
     @GetMapping("/e")
     public String exceptionTest(){
-        return feignService.exceptionRequestTest();
+        return serviceApi.exceptionRequestTest();
     }
 
     @GetMapping("/getAccountById")

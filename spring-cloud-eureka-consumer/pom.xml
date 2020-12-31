@@ -76,6 +76,12 @@
             <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
+        <!--使用spring security来做接口的安全认证-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>

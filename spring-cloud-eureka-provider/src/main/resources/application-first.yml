@@ -1,0 +1,17 @@
+server:
+  port: 8084
+eureka:
+  client:
+    service-url:
+      defaultZone: http://erk2.com:7002/eureka
+    healthcheck:
+      # 是否设置健康检查
+      enabled: true
+  instance:
+    hostname: eureka-provider
+    instance-id: provider-ins-1
+info:
+  app:
+    name: eureka-provider
+    version: 1.0.0
+    description: ${server.port}
