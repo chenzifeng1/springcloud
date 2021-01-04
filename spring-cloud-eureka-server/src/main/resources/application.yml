@@ -24,6 +24,12 @@ spring:
     user:
       name: czf
       password: 123456
+  datasource:
+    password:
+  boot:
+    admin:
+      client:
+        url: http://localhost:7777
 
 eureka:
   server:
