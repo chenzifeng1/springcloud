@@ -1,0 +1,21 @@
+server:
+  port: 9999
+eureka:
+  client:
+    service-url:
+      defaultZone: http://erk2.com:7002/eureka
+spring:
+  application:
+    name: config-center
+  cloud:
+    config:
+      enabled: true
+      server:
+        git:
+          # 仓库地址 https://github.com/chenzifeng1/config-center.git
+          uri: https://github.com/chenzifeng1/config-center
+          username: chengzifeng1
+          password: ${myconfig.password}
+          # 默认时间单位 s 访问git的速度比较慢
+          timeout: 15
+
