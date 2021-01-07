@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+spring-cloud-config-center/src/main/resources/application.yml
