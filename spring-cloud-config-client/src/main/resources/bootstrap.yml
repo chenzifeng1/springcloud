@@ -1,0 +1,28 @@
+#spring.application.name=config-client
+#spring.cloud.config.discovery.enabled=true
+#spring.cloud.config.discovery.service-id=config-center
+#spring.cloud.config.profile=test
+#spring.cloud.config.label=master
+#
+#
+#eureka.client.service-url.defaultZone=http://erk2.com:7002/eureka
+#
+server:
+  port: 8085
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+#      discovery:
+#        enabled: true
+#        service-id: config-center
+      profile: test
+      label: master
+      uri: http://localhost:9999/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://erk2.com:7002/eureka
+  instance:
+    instance-id: config-center-1

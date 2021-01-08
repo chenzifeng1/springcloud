@@ -11,8 +11,8 @@
     <groupId>com.chenzifeng.eureka</groupId>
     <artifactId>eureka-comsumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eureka-comsumer</name>
-    <description>Demo project for Spring Boot</description>
+    <name>eureka-consumer</name>
+    <description>微服务消费者</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -76,11 +76,11 @@
             <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
-        <!--使用spring security来做接口的安全认证-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+        <!--&lt;!&ndash;使用spring security来做接口的安全认证&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-security</artifactId>-->
+        <!--</dependency>-->
 
 
         <!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-client -->
@@ -90,6 +90,15 @@
             <version>2.3.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

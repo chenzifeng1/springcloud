@@ -19,3 +19,9 @@ spring:
           # 默认时间单位 s 访问git的速度比较慢
           timeout: 15
 
+
+myconfig:
+  password: czf001413
+info:
+  author: chenzifeng
+  description: 配置中心

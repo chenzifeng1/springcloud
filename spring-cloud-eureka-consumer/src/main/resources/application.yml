@@ -1,22 +1,25 @@
-server:
-  port: 8090
+spring:
+  #  security:
+  #    user:
+  #      name: root
+  #      password: root
+  application:
+    name: consumer
+  boot:
+    admin:
+      client:
+        url: http://localhost:7777
+
+  profiles:
+    active: dev
+
+
 eureka:
   client:
     service-url:
       defaultZone: http://erk2.com:7002/eureka
   instance:
     instance-id: consumer-ins-1
-#ribbon:
-#  # 连接超时时间（ms）
-#  ConnectTimeout: 1000
-#  # 业务逻辑超时时间
-#  ReadTimeout: 2000
-#  # 最大自动重试次数 不包含首次调用
-#  MaxAutoRetries: 2
-#  # 重试负载均衡其他实例的最大重试次数，不包括首次调用
-#  MaxAutoRetriesNextServer: 1
-#  # 是否所有操作都重试
-#  OkToRetryOnAllOperations: false
 
 feign:
   # 开启hystrix
@@ -28,29 +31,13 @@ feign:
         connncetTime: 5000
         readTimeout: 5000
         loggerLevel: basic
-
-#  httpclient:
-#    connection-timer-repeat: 6
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-#    connection-timeout: 2
 info:
   app:
     name: eureka-consumer
     version: 1.0.0
     description: 测试
-
-spring:
-  security:
-    user:
-      name: root
-      password: root
-  application:
-    name: consumer
-  boot:
-    admin:
-      client:
-        url: http://localhost:7777

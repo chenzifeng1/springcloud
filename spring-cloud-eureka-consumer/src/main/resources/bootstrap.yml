@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        # config center 的服务id
+        service-id: config-center
+      # 配置文件环境 表明是开发,生产还是测试环境
+      profile: test
+      # git仓库的分支
+      label: master
