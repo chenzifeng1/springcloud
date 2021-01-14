@@ -9,12 +9,24 @@
     解决方式：  
         1.在服务提供端采用`@PostMapping` + `@RequestBody`注解来接收请求 （不推荐，尤其是服务跨项目时，更改对方接口注解并不合理）  
         2.重写Openfeign的发送请求的实现，其实已经有人写好了，所以我们直接加个依赖即可，依赖如下:    
-```xml
-       <dependency>
-           <groupId>io.github.openfeign</groupId>
-           <artifactId>feign-httpclient</artifactId>
-       </dependency>   
-```
+    ```xml
+           <dependency>
+               <groupId>io.github.openfeign</groupId>
+               <artifactId>feign-httpclient</artifactId>
+           </dependency>   
+    ```
+3. 关于SpringCloud Config在配置时无法加载bootstrap.yml文件的问题：
+    首先引入spring-cloud-context的依赖包，这个依赖是spring-cloud来做上下文配置使用的
+    ```xml
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-context</artifactId>
+            </dependency>
+    ```
+    如果引入之后依然无法加载配置文件，去看一下是不是没有`spring.cloud.bootstrap.enabled`这个环境变量，如果这个变量为false或者没有，那么
+    spring cloud 在检查配置文件时就不会加载`bootstrap.yml`的配置文件的。
+    配置环境变量的方法：`Edit configurations`->`Enviroment`->`Enviroment varibles`添加即可
+   
 
 
         

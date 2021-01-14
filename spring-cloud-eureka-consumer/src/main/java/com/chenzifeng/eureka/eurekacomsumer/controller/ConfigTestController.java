@@ -26,7 +26,7 @@ public class ConfigTestController {
 
     @GetMapping("/test")
     public String test(){
-        String str = String.format("从配置中心的获取的配置信息,label:{},version:{}",label,version);
+        String str = String.format("从配置中心的获取的配置信息,label:%s,version:%s",label,version);
         return str;
     }
 
