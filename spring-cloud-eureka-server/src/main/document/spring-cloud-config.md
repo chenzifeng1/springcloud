@@ -70,3 +70,18 @@ spring:
           timeout: 15
   
 ```
+
+### 手动配置热更新
+1. 开启服务actuator的refresh端点，自己学习时可以全打开
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+      # include: *
+        include: ["refresh","health"]       
+```
+2. 在需要使用热更新的类上加上`@RefreshScope`
+3. 使用`POST`请求访问对应服务的refresh接口,不能直接用GET请求发送，测试的话可以暴露一个get请求的接口做请求转发
+
+

@@ -41,3 +41,5 @@
 #    name: eureka-consumer
 #    version: 1.0.0
 #    description: 测试
+server:
+  port: 8090
