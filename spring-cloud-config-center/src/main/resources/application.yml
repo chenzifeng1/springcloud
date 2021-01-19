@@ -18,10 +18,19 @@ spring:
           password: ${myconfig.password}
           # 默认时间单位 s 访问git的速度比较慢
           timeout: 15
-
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 myconfig:
   password: czf001413
 info:
   author: chenzifeng
   description: 配置中心
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

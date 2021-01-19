@@ -13,14 +13,6 @@
 #  profiles:
 #    active: dev
 #
-#
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://erk2.com:7002/eureka
-#  instance:
-#    instance-id: consumer-ins-1
-#
 #feign:
 #  # 开启hystrix
 #  hystrix:
@@ -42,4 +34,4 @@
 #    version: 1.0.0
 #    description: 测试
 server:
-  port: 8090
+  port: 8092

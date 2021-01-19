@@ -11,12 +11,17 @@ spring:
       label: master
   application:
     name: consumer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 eureka:
   client:
     service-url:
       defaultZone: http://erk2.com:7002/eureka
   instance:
-    instance-id: consumer-ins-1
+    instance-id: consumer-ins-2
 info:
   app:
     name: eureka-consumer
