@@ -18,6 +18,10 @@ spring:
           password: ${myconfig.password}
           # 默认时间单位 s 访问git的速度比较慢
           timeout: 15
+    bus:
+      trace:
+        # 开启消息追踪
+        enabled: true
   rabbitmq:
     host: localhost
     port: 5672

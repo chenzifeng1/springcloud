@@ -4,7 +4,7 @@
 所以我们可以配置一个服务来做`配置中心`。
 ## 配置中心
 配置中心其实就是自动帮我们完成替换配置文件，然后进行服务热加载的过程。  
-![配置中心](../img/配置中心.PNG)
+![配置中心](../../img/配置中心.PNG)
 配置中心可以视作一个微服务，只不过这个微服务是为其他微服务提供公用服务的。
 所以我们会把配置中心当作一个服务向eureka注册一下。其他的服务如果想通过配置中心来做到配置更新的话，那么必须
 要知道去哪里找这个配置中心，也就是说配置中心必须要提供一个地址来供其他服务方法。
@@ -79,7 +79,7 @@ management:
     web:
       exposure:
       # include: *
-        include: ["refresh","health"]       
+        include: ["refresh","health","bus-refresh"]       
 ```
 2. 在需要使用热更新的类上加上`@RefreshScope`
 3. 使用`POST`请求访问对应服务的refresh接口,不能直接用GET请求发送，测试的话可以暴露一个get请求的接口做请求转发
@@ -89,6 +89,22 @@ management:
 但是，如果一个比较大的、有较多的服务节点服务，那我们一个个的去刷新节点的明显不合适。所以需要一种手段来帮我们按照服务
 统一把所有节点的配置文件进行热加载。
 
-我们可以使用`Bus`来完成这种服务更新的策略。下面简单介绍一下`Bus`:
+- Spring Cloud Bus（消息总线）: 我们可以使用消息总线来解决一次更新多个服务节点的配置文件的问题。Spring cloud bus通过轻量消息
+代理连接各个分布的节点。这会用在广播状态的变化（例如配置变化）或者其他的消息指令。Spring bus的一个核心思想是通过分布式的启动器对
+spring boot应用进行扩展，也可以用来建立一个多个应用之间的通信频道。目前实现的方式是用AMQP消息代理作为通道。
 
+Spring Cloud Bus实际上是利用了MQ广播机制在分布式系统中传播消息，目前常用的方式是Kafka和RabbitMQ，在这个项目中我们先使用RabbitMQ来完成这一功能。
+配置RabbitMQ可以见[RabbitMQ](RabbitMQ.md)
+
+我们还需要在config-center的服务端和客户端（微服务）加入以下依赖
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+</dependency>
+```
+另外config-center的服务端还需要开启actuator的bus-refresh端点,配置方法见上文
+
+执行： 当我们更新了远程仓库的配置之后，配置中心在访问对应的配置文件时会去远程仓库进行拉取。之后我们需要用`POST`请求访问
+[http://config-center:port/actuator/bus-refresh](),来刷新服务配置文件。
 
