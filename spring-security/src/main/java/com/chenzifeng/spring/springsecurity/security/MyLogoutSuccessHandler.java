@@ -1,4 +1,4 @@
-package com.chenzifeng.spring.springsecurity.service;
+package com.chenzifeng.spring.springsecurity.security;
 
 import org.springframework.security.core.Authentication;
 

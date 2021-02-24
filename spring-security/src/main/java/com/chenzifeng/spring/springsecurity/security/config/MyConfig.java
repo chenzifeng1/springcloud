@@ -1,8 +1,8 @@
-package com.chenzifeng.spring.springsecurity.config;
+package com.chenzifeng.spring.springsecurity.security.config;
 
-import com.chenzifeng.spring.springsecurity.service.MyAuthenticationProvider;
-import com.chenzifeng.spring.springsecurity.service.MyLogoutSuccessHandler;
-import com.chenzifeng.spring.springsecurity.service.UserService;
+import com.chenzifeng.spring.springsecurity.security.MyAuthenticationProvider;
+import com.chenzifeng.spring.springsecurity.security.MyLogoutSuccessHandler;
+import com.chenzifeng.spring.springsecurity.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,15 +10,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 
 import javax.sql.DataSource;
-import java.util.Map;
 
 /**
  * @ProjectName: spring-security
@@ -37,12 +34,10 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     DataSource dataSource;
-
     @Autowired
     UserService userService;
-
-
-
+    @Autowired
+    MyAuthenticationProvider myAuthenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -75,11 +70,11 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
                 //.rememberMe()
                 .and()
                 .and()
-                .authorizeRequests()
+                .authorizeRequests();
                 //Role 角色 ; Authority 权限
                 //一般不这样配置权限，因为太不灵活了 可以在方法级别配置
-        .antMatchers("/admin/**").hasRole("admin")
-        .antMatchers("/user/**").hasRole("user");
+                //.antMatchers("/admin/**").hasRole("admin")
+                //.antMatchers("/user/**").hasRole("user");
 
 
     }
@@ -108,14 +103,16 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //我们可以重写configure来定义在内存中存储哪些用户信息 小项目的用户名信息可以存在内存，项目大起来必定要进行数据库的校验
-//        JdbcUserDetailsManager manager = auth.jdbcAuthentication().dataSource(dataSource).getUserDetailsService();
+        /*
+         * JdbcUserDetailsManager 来操作User以及用户组:create,delete
+         */
+        JdbcUserDetailsManager manager = auth.jdbcAuthentication().dataSource(dataSource).getUserDetailsService();
 //        //这里自定义ORM 这里面重写loadUserByUsername的方法，这里面我们可以用不同的数据源：mybatis,hibernate,spring data jpa.redis都可以作为数据源
-//        auth.userDetailsService(userService)
-//        .and()
-//        .authenticationProvider(new MyAuthenticationProvider());
-        auth.inMemoryAuthentication()
-                .withUser("czf").password(bCryptPasswordEncoder().encode("123")).roles("admin")
-        .and().withUser("cub").password(bCryptPasswordEncoder().encode("321")).roles("user");
+
+        auth.userDetailsService(userService)
+        .and()
+        .authenticationProvider(myAuthenticationProvider);
+
     }
 
 

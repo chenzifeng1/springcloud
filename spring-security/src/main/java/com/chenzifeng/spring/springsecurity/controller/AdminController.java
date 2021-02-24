@@ -14,8 +14,10 @@ import java.util.Random;
 @RequestMapping("admin")
 public class AdminController {
 
+    /**
+     *这个注解只能实现 或 的关系，表示有其中的一个角色即可。不能实现 并 的关系
+     */
     @GetMapping("/hi")
-    //这个注解只能实现 或 的关系，表示有其中的一个角色即可。不能实现 并 的关系
     @Secured("{ROLE_admin，ROLE_user}")
     public JSONObject hi(){
         JSONObject jsonObject = new JSONObject();
@@ -23,6 +25,7 @@ public class AdminController {
         jsonObject.put("kind","admin||user");
         return jsonObject;
     }
+
 
     @GetMapping("/info")
     @PreAuthorize("hasRole('ROLE_admin')")

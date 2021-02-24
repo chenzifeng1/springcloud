@@ -1,4 +1,4 @@
-package com.chenzifeng.spring.springsecurity.service;
+package com.chenzifeng.spring.springsecurity.security;
 
 import com.sun.deploy.net.cookie.CookieUnavailableException;
 import org.springframework.security.authentication.AuthenticationProvider;

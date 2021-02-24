@@ -1,4 +1,4 @@
-package com.chenzifeng.spring.springsecurity.config;
+package com.chenzifeng.spring.springsecurity.security;
 
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

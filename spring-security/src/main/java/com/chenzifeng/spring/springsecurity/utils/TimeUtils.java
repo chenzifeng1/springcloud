@@ -1,6 +1,7 @@
 package com.chenzifeng.spring.springsecurity.utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @ProjectName: spring-security
@@ -15,6 +16,6 @@ public class TimeUtils {
     public static final SimpleDateFormat formatOne = new SimpleDateFormat("yyyy-MM-DD");
 
     public static String getNowTimeString(){
-
+        return formatOne.format(new Date());
     }
 }
