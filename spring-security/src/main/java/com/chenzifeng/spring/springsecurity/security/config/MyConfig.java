@@ -1,5 +1,6 @@
 package com.chenzifeng.spring.springsecurity.security.config;
 
+import com.chenzifeng.spring.springsecurity.entity.RoleEnum;
 import com.chenzifeng.spring.springsecurity.security.MyAuthenticationProvider;
 import com.chenzifeng.spring.springsecurity.security.MyLogoutSuccessHandler;
 import com.chenzifeng.spring.springsecurity.security.UserService;
@@ -11,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 
@@ -34,11 +34,19 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     DataSource dataSource;
+
     @Autowired
     UserService userService;
+
     @Autowired
     MyAuthenticationProvider myAuthenticationProvider;
 
+    /**
+     *  拦截http请求，这里是比较早的拦截器
+     *
+     * @param http http请求
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -81,7 +89,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 
 
     /**
-     * 这个是第一步拦截，可以在这里配置忽略静态资源的认证
+     * 这个是拦截，可以在这里配置忽略静态资源的认证
      *
      * @param web
      * @throws Exception
@@ -95,23 +103,29 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 这里配置授权信息
+     * 这里配置授权信息，
      *
-     * @param auth
+     * @param auth 授权信息
      * @throws Exception
      */
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //我们可以重写configure来定义在内存中存储哪些用户信息 小项目的用户名信息可以存在内存，项目大起来必定要进行数据库的校验
-        /*
-         * JdbcUserDetailsManager 来操作User以及用户组:create,delete
-         */
-        JdbcUserDetailsManager manager = auth.jdbcAuthentication().dataSource(dataSource).getUserDetailsService();
-//        //这里自定义ORM 这里面重写loadUserByUsername的方法，这里面我们可以用不同的数据源：mybatis,hibernate,spring data jpa.redis都可以作为数据源
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                //设置 默认值
+                .withDefaultSchema()
+                .withUser("user")
+                .password(bCryptPasswordEncoder().encode("password"))
+                .roles(RoleEnum.USER.getRoleName())
+                .and()
+                //
+                .and()
+                .userDetailsService(userService)
+                .and()
+                .authenticationProvider(myAuthenticationProvider);
 
-        auth.userDetailsService(userService)
-        .and()
-        .authenticationProvider(myAuthenticationProvider);
+
 
     }
 

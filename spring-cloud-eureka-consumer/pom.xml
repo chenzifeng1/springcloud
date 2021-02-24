@@ -45,11 +45,7 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
             <version>2.3.4.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>com.chenzifeng.service-api</groupId>
-            <artifactId>service-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
         <!-- 解决openfeign请求方式转换问题 get->post -->
         <dependency>
             <groupId>io.github.openfeign</groupId>

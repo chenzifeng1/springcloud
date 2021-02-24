@@ -17,7 +17,7 @@ import java.util.Collection;
  * @Date: 2021/2/21 13:49
  * @Version: 1.0
  */
-@TableName("my_user")
+@TableName("user")
 public class MyUser extends User {
 
     private String email;

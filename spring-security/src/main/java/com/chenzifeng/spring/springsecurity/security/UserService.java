@@ -3,12 +3,14 @@ package com.chenzifeng.spring.springsecurity.security;
 
 import com.chenzifeng.spring.springsecurity.entity.MyUser;
 import com.chenzifeng.spring.springsecurity.service.MyUserService;
+import com.chenzifeng.spring.springsecurity.service.impl.MyUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,9 +29,9 @@ import java.util.*;
 @Service
 public class UserService implements UserDetailsService {
 
-
     @Autowired
-    MyUserService userService;
+    MyUserService myUserService;
+
 
     public static final HashMap<String, UserDetails> userDataSources = new HashMap<>();
 
@@ -50,7 +52,7 @@ public class UserService implements UserDetailsService {
         if (username == null) {
             throw new IllegalArgumentException("用户名为null");
         }
-        MyUser myUser = userService.findByUsername(username);
+        MyUser myUser = myUserService.findByUsername(username);
         //从数据库查询：注 这里其实可以先从redis中查询，没有命中再去数据库查询（没有必要）
         if (myUser != null) {
             return myUser;

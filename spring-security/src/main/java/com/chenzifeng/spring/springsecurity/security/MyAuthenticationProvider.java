@@ -1,6 +1,5 @@
 package com.chenzifeng.spring.springsecurity.security;
 
-import com.sun.deploy.net.cookie.CookieUnavailableException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -27,7 +26,6 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
 
         if (authentication.isAuthenticated()){
             //如果用户已经被授权
