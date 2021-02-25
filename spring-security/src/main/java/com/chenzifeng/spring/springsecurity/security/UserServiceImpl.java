@@ -27,32 +27,18 @@ import java.util.*;
  * @Version: 1.0
  */
 @Service
-public class UserService implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService {
 
     @Autowired
-    MyUserService myUserService;
-
-
-    public static final HashMap<String, UserDetails> userDataSources = new HashMap<>();
-
-    static {
-        User czf = new User("czf", "czf", Collections.singletonList(new SimpleGrantedAuthority("admin")));
-        User lyq = new User("lyq", "lyq", Collections.singletonList(new SimpleGrantedAuthority("admin")));
-        User cyb = new User("cyb", "cyb", Collections.singletonList(new SimpleGrantedAuthority("user")));
-        User ddq = new User("ddq", "ddq", Collections.singletonList(new SimpleGrantedAuthority("user")));
-
-        userDataSources.put("czf", czf);
-        userDataSources.put("lyq", lyq);
-        userDataSources.put("cyb", cyb);
-        userDataSources.put("ddq", ddq);
-    }
+    MyUserService myUserServiceImpl = null;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("做用户验证:");
         if (username == null) {
             throw new IllegalArgumentException("用户名为null");
         }
-        MyUser myUser = myUserService.findByUsername(username);
+        MyUser myUser = myUserServiceImpl.findByUsername(username);
         //从数据库查询：注 这里其实可以先从redis中查询，没有命中再去数据库查询（没有必要）
         if (myUser != null) {
             return myUser;
@@ -61,4 +47,11 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    /**
+     * 使用set方法进行依赖注入
+     * @param myUserServiceImpl
+     */
+    public void setMyUserServiceImpl(MyUserService myUserServiceImpl) {
+        this.myUserServiceImpl = myUserServiceImpl;
+    }
 }

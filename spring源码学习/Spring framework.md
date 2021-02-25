@@ -257,3 +257,175 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     ```
 
     这里主要看参数为字符数组的`loadBeanDefinitions(String...locations)` ,这个getConfigLocations()方法返回一系列资源地址，子类可以重写这个方法设置，以提供一组资源位置以从中加载bean定义。比如说，我在Resources下新建了一个配置文件“myApplicationContext.xml”,在getConfigLocation的时候会读取到这个配置文件的文件名，在之后加载过程中会读取该配置文件中的bean配置信息。
+
+    重点看一下loadBeanDefinitions(String... locations)这个方法吧，看我们的配置文件中的信息是如何被加载进去的。
+
+    ```java
+    @Override
+    public int loadBeanDefinitions(String... locations) throws BeanDefinitionStoreException {
+       Assert.notNull(locations, "Location array must not be null");
+       int count = 0;
+       for (String location : locations) {
+          count += loadBeanDefinitions(location);
+       }
+       return count;
+    }
+    ```
+
+    遍历传进来的`locations` ,比如说我只配置了一个`applicationContext.xml` 配置文件，这里遍历加载的时候只会加载这一个配置文件里面的bean定义信息。我们看一下如何加载的。
+
+    ```java
+    @Override
+    public int loadBeanDefinitions(String location) throws BeanDefinitionStoreException {
+       return loadBeanDefinitions(location, null);
+    }
+    ```
+
+    这里其实对loadBeanDefinitions进行了多次重载，继续查看
+
+    ```java
+    public int loadBeanDefinitions(String location, @Nullable Set<Resource> actualResources) throws BeanDefinitionStoreException {
+       ResourceLoader resourceLoader = getResourceLoader();
+       if (resourceLoader == null) {
+          throw new BeanDefinitionStoreException(
+                "Cannot load bean definitions from location [" + location + "]: no ResourceLoader available");
+       }
+
+       if (resourceLoader instanceof ResourcePatternResolver) {
+          // Resource pattern matching available.
+          try {
+             Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
+             int count = loadBeanDefinitions(resources);
+             if (actualResources != null) {
+                Collections.addAll(actualResources, resources);
+             }
+             if (logger.isTraceEnabled()) {
+                logger.trace("Loaded " + count + " bean definitions from location pattern [" + location + "]");
+             }
+             return count;
+          }
+          catch (IOException ex) {
+             throw new BeanDefinitionStoreException(
+                   "Could not resolve bean definition resource pattern [" + location + "]", ex);
+          }
+       }
+       else {
+          // Can only load single resources by absolute URL.
+          Resource resource = resourceLoader.getResource(location);
+          int count = loadBeanDefinitions(resource);
+          if (actualResources != null) {
+             actualResources.add(resource);
+          }
+          if (logger.isTraceEnabled()) {
+             logger.trace("Loaded " + count + " bean definitions from location [" + location + "]");
+          }
+          return count;
+       }
+    }
+    ```
+
+    看看资源加载器是不是资源模式加载器，这个资源加载器在`loadBeanDefinitions(DefaultListableBeanFactory beanFactory)` 这个方法内设置过`beanDefinitionReader.setResourceLoader(this)` 我们现在用到的资源加载器就是在这里设置的，通过断点调试，可以看出两个地方的ResourceLoader是同一个对象。既然resourceLoader是ResourcePatternResolver的实例，那么第一个判断语句为true，我们继续看之后怎么执行。
+
+    `Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);` 这个接口方法的真正执行的方法是`PathMatchingResourcePatternResolver` 的实现方法,具体内容先略过，这个方法返回了一个Resource数组，之后又调用了loadBeanDefinitions的其他重载方法。之后一系列的重载方法的调用，在这个过程中，我们可以关注一下主要参数的变化。
+
+    String[]→String→Resource[]→Resource→EncodedResource→ 开始真正的做加载BeanDefinitions操作的方法`doLoadBeanDefinitions(InputSource inputSource, Resource resource)` 。看一下`doLoadBeanDefinitions` 这个方法内容:
+
+    ```java
+    Document doc = doLoadDocument(inputSource, resource);
+    int count = registerBeanDefinitions(doc, resource);
+    if (logger.isDebugEnabled()) {
+       logger.debug("Loaded " + count + " bean definitions from " + resource);
+    }
+    return count;
+    ```
+
+    这个方法会把配置文件转化成Document对象doc，该对象里面基本都是节点信息
+
+    ![Spring%20framework%2080df3c81d678438c85eb0f8059dafbf0/Untitled%202.png](Spring%20framework%2080df3c81d678438c85eb0f8059dafbf0/Untitled%202.png)
+
+    之后根据Document对象的内容注册BeanDefinition，重点看一下这个方法如何完成注册的。
+
+    ```java
+    public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
+       BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
+       int countBefore = getRegistry().getBeanDefinitionCount();
+       documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
+       return getRegistry().getBeanDefinitionCount() - countBefore;
+    }
+    ```
+
+    这个方法先创建了一个Reader（BeanDefinitionDocumentReader）对象，之后统计了一下BeanDefinition的个数。BeanDefinition的注册具体是在   `documentReader.registerBeanDefinitions(doc, createReaderContext(resource));` 这个方法内完成的。我们来看一下如何实现：这个接口的实现方法调用了`doRegisterBeanDefinitions(Element root)` 这个方法，在spring框架中（java方法命名规范也应该如此）以`doXX` 开头的方法基本都是进行实际操作的方法。这个方法中模拟了一组委托（实际不需要，具体作用可以见注释），之后调用了一个重要的方法`parseBeanDefinitions(root, this.delegate);` 开始解析BeanDefinitions。
+
+    ```java
+    protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
+       if (delegate.isDefaultNamespace(root)) {
+          NodeList nl = root.getChildNodes();
+          for (int i = 0; i < nl.getLength(); i++) {
+             Node node = nl.item(i);
+             if (node instanceof Element) {
+                Element ele = (Element) node;
+                if (delegate.isDefaultNamespace(ele)) {
+                   parseDefaultElement(ele, delegate);
+                }
+                else {
+                   delegate.parseCustomElement(ele);
+                }
+             }
+          }
+       }
+       else {
+          delegate.parseCustomElement(root);
+       }
+    }
+    ```
+
+    先判断一下给定的节点是否指明了默认命名空间，在我们配置文件中没有引用其他的标签，解析的元素都是在默认命名空间里的。获取root的子节点的集合，然后遍历这个集合。遍历的时候看一下正在遍历的元素节点是否是Element，不是的话就不继续解析了。之后会根据元素节点是否属于默认命名空间来调用不同的解析方法`parseCustomElement()`/`parseCustomElement()` 。默认空间的元素一共四种，在parseCustomElement方法中可以很好的看出
+
+    ```java
+    private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
+       if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
+          importBeanDefinitionResource(ele);
+       }
+       else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) {
+          processAliasRegistration(ele);
+       }
+       else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
+          processBeanDefinition(ele, delegate);
+       }
+       else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
+          // recurse
+          doRegisterBeanDefinitions(ele);
+       }
+    }
+    ```
+
+    四种元素类型：
+
+    1. public static final String IMPORT_ELEMENT = "import"; 
+    2. public static final String ALIAS_ELEMENT = "alias";
+    3. public static final String BEAN_ELEMENT = "bean"
+    4. public static final String NESTED_BEANS_ELEMENT = "beans"
+
+    根据不同元素类型调用不同的解析方法，这里具体不看了，需要再补充。
+
+    这里我们可以看一下spring如何解析非默认命名空间的元素的，看一下`parseCustomElement` 的实现，这个方法也调用了自己的重载方法。
+
+    ```java
+    @Nullable
+    public BeanDefinition parseCustomElement(Element ele, @Nullable BeanDefinition containingBd) {
+    		//获取命名空间
+       String namespaceUri = getNamespaceURI(ele);
+       if (namespaceUri == null) {
+          return null;
+       }
+    		//根据命名空间找到对应的NamespaceHandler
+       NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);
+       if (handler == null) {
+          error("Unable to locate Spring NamespaceHandler for XML schema namespace [" + namespaceUri + "]", ele);
+          return null;
+       }
+       return handler.parse(ele, new ParserContext(this.readerContext, this, containingBd));
+    }
+    ```
+
+    由于不是默认的命名空间，所以我们得先获取元素所在的命名空间，之后再根据命名空间来获取对应的NamespaceHandler
