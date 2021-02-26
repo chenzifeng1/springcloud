@@ -52,7 +52,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 //自定义 登录界面
                 .formLogin()
-                .loginPage("/static/login.html")
+                .loginPage("/login.html")
                 .successForwardUrl("/success")
                 .failureForwardUrl("/fail")
                  //处理登录请求的接口 这里是表单提交后的处理的接口地址
@@ -71,7 +71,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
                 .and()
                  // 这里对放开static的页面和身份认证接口的访问 避免无限循环授权认证的重定向
                 .authorizeRequests()
-                .antMatchers("/static/login.html","/static/**.html", "/authentication/**")
+                .antMatchers("/login.html","/static/**.html", "/authentication/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

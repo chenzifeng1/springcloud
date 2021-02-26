@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @SpringBootApplication
 @EnableWebSecurity
-//可以基于方法进行授权访问
 @EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true)
 public class SpringSecurityApplication {
 

@@ -20,8 +20,7 @@ public class AuthenticationController {
 
     @PostMapping("/form")
     public String form(String username,String password){
-        System.out.println(username);
-        System.out.println(password);
+
         return "success";
     }
 
@@ -29,5 +28,9 @@ public class AuthenticationController {
     public String login(){
         System.out.println("在这里做重定向");
         return "redirect:/static/login.html";
+    }
+    @GetMapping("/logout")
+    public void logout(){
+
     }
 }

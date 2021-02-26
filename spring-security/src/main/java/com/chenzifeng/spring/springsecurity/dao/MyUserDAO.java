@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @Version: 1.0
  */
 @Mapper
-public interface MyUserDao extends BaseMapper<MyUser> {
+public interface MyUserDAO extends BaseMapper<MyUser> {
 
 
 }
