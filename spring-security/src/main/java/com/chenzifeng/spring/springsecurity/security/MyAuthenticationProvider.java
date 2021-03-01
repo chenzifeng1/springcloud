@@ -1,11 +1,15 @@
 package com.chenzifeng.spring.springsecurity.security;
 
+import com.chenzifeng.spring.springsecurity.entity.MyUser;
+import com.chenzifeng.spring.springsecurity.service.MyUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,8 +25,13 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
+
+    @Autowired
+    MyUserService myUserService = null;
+
     /**
      * 这里写校验 身份认证
+     *
      * @param authentication
      * @return
      * @throws AuthenticationException
@@ -31,26 +40,28 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
-        System.out.println("username："+username);
-        System.out.println("password："+password);
-        if (authentication.isAuthenticated()){
-            //如果用户已经被授权
-
-        }else {
-            //没有被授权，返回登录页面
-            log.error("用户名或密码错误");
-            //throw new CredentialsExpiredException()
+        MyUser user = myUserService.findByUsername(username);
+        if(user == null){
+            throw new UsernameNotFoundException("没有对应的用户信息");
         }
+
+        System.out.println("password：" + password);
+        System.out.println("username：" + username);
         return authentication;
     }
 
     /**
      * 是否支持自定义的authen
+     *
      * @param aClass
      * @return
      */
     @Override
     public boolean supports(Class<?> aClass) {
         return true;
+    }
+
+    public void setMyUserService(MyUserService myUserServiceImpl) {
+        this.myUserService = myUserServiceImpl;
     }
 }

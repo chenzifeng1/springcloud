@@ -3,10 +3,11 @@ package com.chenzifeng.spring.springsecurity.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @ProjectName: spring-security
@@ -22,12 +23,15 @@ public class MyUser extends User {
 
     private String email;
     private String headImg;
-    private String iphone;
+    private String phone;
 
     public MyUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 
+    public MyUser() {
+        super("user","password", Collections.singleton(new SimpleGrantedAuthority("guest")));
+    }
 
     public String getEmail() {
         return email;
@@ -45,11 +49,11 @@ public class MyUser extends User {
         this.headImg = headImg;
     }
 
-    public String getIphone() {
-        return iphone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setIphone(String iphone) {
-        this.iphone = iphone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

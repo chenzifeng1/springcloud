@@ -1,18 +1,30 @@
 package com.chenzifeng.spring.springsecurity.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.chenzifeng.spring.springsecurity.entity.MyUser;
+import com.chenzifeng.spring.springsecurity.service.MyUserService;
+import com.chenzifeng.spring.springsecurity.service.impl.MyUserServiceImpl;
+import com.chenzifeng.spring.springsecurity.utils.JsonUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Random;
 
+/**
+ * @author czf
+ */
 @RestController
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
+
+    @Autowired
+    private MyUserService myUserService = null;
 
     /**
      *这个注解只能实现 或 的关系，表示有其中的一个角色即可。不能实现 并 的关系
@@ -69,4 +81,21 @@ public class AdminController {
         return new Random().nextInt(2);
     }
 
+    /**
+     * 注册接口
+     * @param myUser
+     * @return
+     */
+    @PostMapping("/logOn")
+    public JSONObject logOn(MyUser myUser){
+        myUserService.save(myUser);
+        return JsonUtils.defaultSuccessResponse();
+    }
+
+
+
+
+    public void setMyUserService(MyUserServiceImpl myUserServiceImpl) {
+        this.myUserService = myUserServiceImpl;
+    }
 }

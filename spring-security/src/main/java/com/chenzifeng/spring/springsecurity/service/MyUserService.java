@@ -17,4 +17,14 @@ public interface MyUserService extends IService<MyUser> {
      * @return
      */
     MyUser findByUsername(String username);
+
+
+    /**
+     *
+     * @param myUser
+     * @return
+     */
+    default Boolean checkUserInfo(MyUser myUser){
+        return  !(myUser == null||myUser.getUsername()==null||myUser.getPassword()==null);
+    }
 }
