@@ -1,5 +1,6 @@
 package com.chenzifeng.spring.springsecurity.security.config;
 
+import com.chenzifeng.spring.springsecurity.entity.MyUser;
 import com.chenzifeng.spring.springsecurity.security.MyAuthenticationProvider;
 import com.chenzifeng.spring.springsecurity.security.MyLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 import javax.sql.DataSource;
+import java.util.Collections;
 
 /**
  * @ProjectName: spring-security
@@ -106,13 +109,21 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //我们可以重写configure来定义在内存中存储哪些用户信息 小项目的用户名信息可以存在内存，项目大起来必定要进行数据库的校验
+        MyUser myUser  = new MyUser(
+                "czf",
+                bCryptPasswordEncoder().encode("123"),
+                Collections.singletonList(new SimpleGrantedAuthority("admin")));
+               myUser.setEmail("704734862@qq.com");
+               myUser.setPhone("17815987462");
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
+//                .withUser(myUser)
                 //设置 默认值
                 .and()
                 .userDetailsService(userServiceImpl)
                 .and()
                 .authenticationProvider(myAuthenticationProvider);
+
 
     }
 

@@ -18,6 +18,12 @@ public interface MyUserService extends IService<MyUser> {
      */
     MyUser findByUsername(String username);
 
+    /**
+     * 保存用户信息
+     * @param user
+     */
+    void saveUser(MyUser user);
+
 
     /**
      *

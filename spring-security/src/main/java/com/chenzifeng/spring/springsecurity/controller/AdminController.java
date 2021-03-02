@@ -23,8 +23,7 @@ import java.util.Random;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    private MyUserService myUserService = null;
+
 
     /**
      *这个注解只能实现 或 的关系，表示有其中的一个角色即可。不能实现 并 的关系
@@ -81,21 +80,5 @@ public class AdminController {
         return new Random().nextInt(2);
     }
 
-    /**
-     * 注册接口
-     * @param myUser
-     * @return
-     */
-    @PostMapping("/logOn")
-    public JSONObject logOn(MyUser myUser){
-        myUserService.save(myUser);
-        return JsonUtils.defaultSuccessResponse();
-    }
 
-
-
-
-    public void setMyUserService(MyUserServiceImpl myUserServiceImpl) {
-        this.myUserService = myUserServiceImpl;
-    }
 }

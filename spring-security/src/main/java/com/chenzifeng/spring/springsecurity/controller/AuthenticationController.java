@@ -1,5 +1,11 @@
 package com.chenzifeng.spring.springsecurity.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.chenzifeng.spring.springsecurity.entity.MyUser;
+import com.chenzifeng.spring.springsecurity.service.MyUserService;
+import com.chenzifeng.spring.springsecurity.service.impl.MyUserServiceImpl;
+import com.chenzifeng.spring.springsecurity.utils.JsonUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/authentication")
 public class AuthenticationController {
 
+    @Autowired
+    private MyUserService myUserService = null;
+
     @PostMapping("/form")
     public String form(String username,String password){
 
@@ -32,5 +41,20 @@ public class AuthenticationController {
     @GetMapping("/logout")
     public void logout(){
 
+    }
+
+    /**
+     * 注册接口
+     * @param myUser
+     * @return
+     */
+    @PostMapping("/logOn")
+    public JSONObject logOn(MyUser myUser){
+        myUserService.save(myUser);
+        return JsonUtils.defaultSuccessResponse();
+    }
+
+    public void setMyUserService(MyUserServiceImpl myUserServiceImpl) {
+        this.myUserService = myUserServiceImpl;
     }
 }
