@@ -58,7 +58,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login.html")
                 .successForwardUrl("/success")
                 .failureForwardUrl("/fail")
-                 //处理登录请求的接口 这里是表单提交后的处理的接口地址
+                //处理登录请求的接口 这里是表单提交后的处理的接口地址
                 .loginProcessingUrl("/authentication/form")
                 .and()
                 .logout()
@@ -72,19 +72,19 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
                 .maxSessionsPreventsLogin(true)
                 .and()
                 .and()
-                 // 这里对放开static的页面和身份认证接口的访问 避免无限循环授权认证的重定向
+                // 这里对放开static的页面和身份认证接口的访问 避免无限循环授权认证的重定向
                 .authorizeRequests()
-                .antMatchers("/login.html","/static/**.html", "/authentication/**")
+                .antMatchers("/login.html", "/static/**.html", "/authentication/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
-      ;
+        ;
                 /*
                     勾选remember me之后，登录会生成一个remember me的token(JWT TOKEN是来维持无状态的会话的) 原因：
                     1. 集群式的会话 如果用session共享来实现，太消耗资源
                     2. jwt 可以通过token令牌来进行用户的授权认证
                  */
-                //remember me;
+        //remember me;
     }
 
 
@@ -109,21 +109,20 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //我们可以重写configure来定义在内存中存储哪些用户信息 小项目的用户名信息可以存在内存，项目大起来必定要进行数据库的校验
-        MyUser myUser  = new MyUser(
+        MyUser myUser = new MyUser(
                 "czf",
                 bCryptPasswordEncoder().encode("123"),
                 Collections.singletonList(new SimpleGrantedAuthority("admin")));
-               myUser.setEmail("704734862@qq.com");
-               myUser.setPhone("17815987462");
+        myUser.setEmail("704734862@qq.com");
+        myUser.setPhone("17815987462");
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-//                .withUser(myUser)
+//                .withUser(myUser)  withUser 创建一个User
                 //设置 默认值
                 .and()
                 .userDetailsService(userServiceImpl)
                 .and()
                 .authenticationProvider(myAuthenticationProvider);
-
 
     }
 
