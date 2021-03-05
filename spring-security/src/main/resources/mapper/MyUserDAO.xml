@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chenzifeng.spring.springsecurity.dao.MyUserDAO">
     <insert id="insertUser">
-        insert user("username","password","phone","email","enabled") values (#{})
+        insert into user("username","password","phone","email","enabled") values (
+        #{myUser.username},
+        #{myUser.password},
+        #{myUser.phone},
+        #{myUser.email},
+        #{myUser.enabled})
     </insert>
 
 

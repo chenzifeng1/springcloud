@@ -111,4 +111,13 @@ public class UsernamePasswordAuthenticationFilter extends AbstractAuthentication
 - attemptAuthentication: 这是尝试验证用户信息的方法，方法大概实现了
     1. 获取用户名跟密码
     2. 根据用户名密码创建一个`UsernamePasswordAuthenticationToken`的实例
-    3. 设置
+    3. 设置Details对象，UsernamePasswordAuthenticationToken的Details对象是继承自父类AbstractAuthenticationToken。
+        而details对象是WebAuthenticationDetails的一个实例。这个实例主要描述两个信息：remoteAddress和sessionId
+    4. 调用验证方法`authenticate`
+    
+```java
+public class ProviderManager implements AuthenticationManager, MessageSourceAware, InitializingBean {
+    
+    
+}
+```

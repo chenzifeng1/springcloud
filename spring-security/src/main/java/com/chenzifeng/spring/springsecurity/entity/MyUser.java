@@ -25,8 +25,14 @@ public class MyUser extends User {
     private String headImg;
     private String phone;
 
+    private String password;
+
+    private  String username;
+
     public MyUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
+        this.username = username;
+        this.password = password;
     }
 
     public MyUser() {
@@ -57,5 +63,21 @@ public class MyUser extends User {
         this.phone = phone;
     }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

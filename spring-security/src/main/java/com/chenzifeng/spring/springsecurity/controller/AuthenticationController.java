@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: 1.0
  */
 @RestController
-@RequestMapping("/authentication")
 public class AuthenticationController {
 
     @Autowired
@@ -29,8 +28,8 @@ public class AuthenticationController {
 
     @PostMapping("/form")
     public String form(String username,String password){
-
-        return "success";
+        System.out.println(username + " : " + password);
+        return "redirect:/index.html";
     }
 
     @GetMapping("/login")
@@ -38,6 +37,7 @@ public class AuthenticationController {
         System.out.println("在这里做重定向");
         return "redirect:/static/login.html";
     }
+
     @GetMapping("/logout")
     public void logout(){
 

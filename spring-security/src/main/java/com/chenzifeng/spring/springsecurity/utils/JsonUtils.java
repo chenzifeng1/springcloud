@@ -1,6 +1,7 @@
 package com.chenzifeng.spring.springsecurity.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.chenzifeng.spring.springsecurity.entity.MyUser;
 import lombok.Data;
 
 /**
@@ -20,6 +21,7 @@ public class JsonUtils {
     public static final String CODE = "code";
     public static final String INFO = "info";
     public static final String FAIL_INFO = "fail";
+    public static final String OBJECT = "object";
     public static final int SUCCESS_CODE = 200;
     public static final int FAIL_CODE = 500;
 
@@ -76,5 +78,24 @@ public class JsonUtils {
         json.put(STATUS,status);
         json.put(CODE,code);
         return json;
+    }
+
+    /**
+     *
+     * @param s
+     * @param obj
+     * @return
+     */
+    public static JSONObject ok(String s, Object obj) {
+        JSONObject json = new JSONObject();
+        json.put(INFO,s);
+        json.put(OBJECT,obj);
+        return json;
+    }
+
+    public static JSONObject error(String message) {
+         JSONObject json = new JSONObject();
+         json.put(INFO,message);
+         return json;
     }
 }

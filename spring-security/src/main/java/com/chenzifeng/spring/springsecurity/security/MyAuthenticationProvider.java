@@ -30,7 +30,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
     MyUserService myUserService = null;
 
     /**
-     * 这里写校验 身份认证
+     * 这里写校验 身份认证 这个方法在UsernamePasswordAuthenticationFilter中的attemptAuthentication方法中调用
      *
      * @param authentication
      * @return

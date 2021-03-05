@@ -3,6 +3,26 @@ spring:
     username: root
     password: root
     url: jdbc:mysql://127.0.0.1:3306/my_program?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 7
+    # 读超时时间:30分钟
+    timeout: PT30M
+    password:
+    jedis:
+      pool:
+        max-active: 8 # 连接池最大连接数，默认为 8 。使用负数表示没有限制。
+        max-idle: 8 # 默认连接数最大空闲的连接数，默认为 8 。使用负数表示没有限制。
+        min-idle: 0 # 默认连接池最小空闲的连接数，默认为 0 。允许设置 0 和 正数。
+        max-wait: -1 # 连接池最大阻塞等待时间，单位：毫秒。默认为 -1 ，表示不限制。
+  # spring session
+  session:
+    store-type: redis
+    timeout: PT30M
+  security:
+    user:
+      name: czf
+      password: 123
 server:
   port: 9110
-

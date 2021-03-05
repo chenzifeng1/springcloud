@@ -4,6 +4,7 @@ package com.chenzifeng.spring.springsecurity.security;
 import com.chenzifeng.spring.springsecurity.entity.MyUser;
 import com.chenzifeng.spring.springsecurity.service.MyUserService;
 import com.chenzifeng.spring.springsecurity.service.impl.MyUserServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -27,6 +28,7 @@ import java.util.*;
  * @Version: 1.0
  */
 @Service
+@Slf4j
 public class UserServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -34,8 +36,9 @@ public class UserServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("做用户验证:");
+        log.info("做用户验证:");
         if (username == null) {
+            log.error("用户名为null");
             throw new IllegalArgumentException("用户名为null");
         }
         MyUser myUser = myUserServiceImpl.findByUsername(username);
