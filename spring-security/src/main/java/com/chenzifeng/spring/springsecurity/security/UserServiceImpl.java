@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserDetailsService {
 
     /**
      * 使用set方法进行依赖注入
+     *
      * @param myUserServiceImpl
      */
     public void setMyUserServiceImpl(MyUserService myUserServiceImpl) {

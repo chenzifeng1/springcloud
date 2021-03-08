@@ -27,7 +27,7 @@ public class FooClientConfiguration {
              * @return
              */
             @Override
-            public boolean inheritParentConfiguration(){
+            public boolean inheritParentConfiguration() {
                 return false;
             }
         };

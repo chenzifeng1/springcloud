@@ -14,12 +14,12 @@ import org.springframework.web.client.RestTemplate;
  * @Version: 1.0
  */
 @Service
-public class   RestTemplateServiceImpl implements RestTemplateService {
+public class RestTemplateServiceImpl implements RestTemplateService {
 
     @Autowired
     private RestTemplate restTemplate;
 
-    public <T> T sendPost(String url, Class<T> responseType){
+    public <T> T sendPost(String url, Class<T> responseType) {
         return null;
     }
 }

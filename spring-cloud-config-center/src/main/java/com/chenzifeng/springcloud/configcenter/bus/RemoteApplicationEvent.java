@@ -7,9 +7,8 @@ import org.springframework.context.ApplicationEvent;
  * @Package: com.chenzifeng.springcloud.configcenter.bus
  * @ClassName: RemoteApplicationEvent
  * @Author: czf
- * @Description:
- * <p>
- *  事件的定义
+ * @Description: <p>
+ * 事件的定义
  * 事件：都继承自ApplicationEvent，
  * spring bus中的事件类，都继承自RemoteApplicationEvent。
  * </p>
@@ -19,7 +18,6 @@ import org.springframework.context.ApplicationEvent;
  * RefreshRemoteApplicationEvent：刷新事件。刷新远端应用配置的事件。<br>
  * UnknownRemoteApplicationEvent：未知事件。<br>
  * </p>
- *
  * @Date: 2021/1/22 15:52
  * @Version: 1.0
  */

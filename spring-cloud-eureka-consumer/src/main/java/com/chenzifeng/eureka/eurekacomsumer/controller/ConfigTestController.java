@@ -45,25 +45,25 @@ public class ConfigTestController {
     private int port;
 
     @GetMapping("/test")
-    public String test(){
-        String str = String.format("从配置中心的获取的配置信息,label:%s,version:%s",label,version);
+    public String test() {
+        String str = String.format("从配置中心的获取的配置信息,label:%s,version:%s", label, version);
         return str;
     }
 
     @GetMapping("/refresh")
     public JSONObject refresh() {
         JSONObject result = new JSONObject();
-        String url = "http://127.0.0.1:"+port+REFRESH_URL;
-        String urlServe = "http://"+serverName+":"+port+REFRESH_URL;
+        String url = "http://127.0.0.1:" + port + REFRESH_URL;
+        String urlServe = "http://" + serverName + ":" + port + REFRESH_URL;
 
-        log.info("请求地址："+url);
+        log.info("请求地址：" + url);
         HttpHeaders headers = new HttpHeaders();
         //设置请求头
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<JSONObject> requestEntity = new HttpEntity<>(result, headers);
-        String string =  restTemplate.postForObject(urlServe,requestEntity,String.class);
-        result.put("result",string);
+        String string = restTemplate.postForObject(urlServe, requestEntity, String.class);
+        result.put("result", string);
         return result;
     }
 

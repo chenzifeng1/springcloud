@@ -16,10 +16,11 @@ import java.util.List;
  * @Version: 1.0
  */
 //@FeignClient(contextId = "serviceApi",name = "provider",fallback = HystrixDowngradeService.class)
-@FeignClient(contextId = "serviceApi",name = "provider",fallbackFactory = HystrixDowngradeService.class)
+@FeignClient(contextId = "serviceApi", name = "provider", fallbackFactory = HystrixDowngradeService.class)
 public interface ServiceApi {
     /**
      * 根据用户id获取用户信息
+     *
      * @param userId
      * @return
      */
@@ -28,6 +29,7 @@ public interface ServiceApi {
 
     /**
      * 获取当前用户列表
+     *
      * @return
      */
     @PostMapping("/userAccount/getUserList")
@@ -35,6 +37,7 @@ public interface ServiceApi {
 
     /**
      * 获取第一个用户信息
+     *
      * @return
      */
     @GetMapping("/userAccount/getFirstUser")
@@ -42,6 +45,7 @@ public interface ServiceApi {
 
     /**
      * 添加用户信息
+     *
      * @param user
      * @return
      */
@@ -50,6 +54,7 @@ public interface ServiceApi {
 
     /**
      * 服务异常测试方法
+     *
      * @return
      */
     @GetMapping("/userAccount/exception")

@@ -12,8 +12,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.RedisHt
  * @Package: com.chenzifeng.spring.springsecurity.config
  * @ClassName: SessionConfig
  * @Author: czf
- * @Description:
- *  注解 `@EnableRedisHttpSession` 自动化配置 Spring Session 使用 Redis 作为数据源
+ * @Description: 注解 `@EnableRedisHttpSession` 自动化配置 Spring Session 使用 Redis 作为数据源
  * @Date: 2021/3/5 11:20
  * @Version: 1.0
  */
@@ -22,10 +21,9 @@ import org.springframework.session.data.redis.config.annotation.web.http.RedisHt
 public class SessionConfig {
 
 
-
     /**
      * 创建 {@link RedisOperationsSessionRepository} 使用的 RedisSerializer Bean 。
-     *
+     * <p>
      * 具体可以看看 {@link RedisHttpSessionConfiguration#setDefaultRedisSerializer(RedisSerializer)} 方法，
      * 它会引入名字为 "springSessionDefaultRedisSerializer" 的 Bean 。
      *
@@ -33,7 +31,7 @@ public class SessionConfig {
      */
 
     @Bean(name = "springSessionDefaultRedisSerializer")
-    public RedisSerializer springSessionDefaultRedisSerializer(){
+    public RedisSerializer springSessionDefaultRedisSerializer() {
         return RedisSerializer.json();
     }
 }

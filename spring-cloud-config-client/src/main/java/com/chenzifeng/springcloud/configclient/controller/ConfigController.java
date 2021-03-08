@@ -22,7 +22,7 @@ public class ConfigController {
 
 
     @GetMapping("/t")
-    public String getConfig(){
+    public String getConfig() {
         return creator;
     }
 }

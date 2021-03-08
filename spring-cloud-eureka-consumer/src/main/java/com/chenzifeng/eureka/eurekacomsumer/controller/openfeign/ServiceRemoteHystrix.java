@@ -39,6 +39,6 @@ public class ServiceRemoteHystrix extends HystrixCommand<UserAccount> {
     @Override
     protected UserAccount getFallback() {
         log.info("降级处理");
-        return new UserAccount(-1,"error",-1,"error@gmail.com");
+        return new UserAccount(-1, "error", -1, "error@gmail.com");
     }
 }

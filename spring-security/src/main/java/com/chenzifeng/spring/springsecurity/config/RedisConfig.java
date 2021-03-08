@@ -16,7 +16,7 @@ import java.time.Duration;
  * @Date: 2021/3/5 9:54
  * @Version: 1.0
  */
-public class RedisConfig  {
+public class RedisConfig {
 
 
 }

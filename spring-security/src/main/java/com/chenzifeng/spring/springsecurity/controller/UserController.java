@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @GetMapping
-    public JSONObject hi(){
+    public JSONObject hi() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("msg","hi");
-        jsonObject.put("kind","user");
+        jsonObject.put("msg", "hi");
+        jsonObject.put("kind", "user");
         return jsonObject;
     }
 }

@@ -37,13 +37,13 @@ public class UserAccountController {
 
     @PostMapping("/getUserList")
     public List<UserAccount> getUserIdList() {
-        log.info(String.format("请求用户列表,请求服务节点端口：%1$s",port));
+        log.info(String.format("请求用户列表,请求服务节点端口：%1$s", port));
         return userAccountService.getUserIdList();
     }
 
     @GetMapping("/getFirstUser")
     public UserAccount getFirstUser() {
-        log.info(String.format("请求首位用户信息,请求服务节点端口：%1$s",port));
+        log.info(String.format("请求首位用户信息,请求服务节点端口：%1$s", port));
         return userAccountService.getUserInfo(1);
     }
 
@@ -52,12 +52,12 @@ public class UserAccountController {
         if (userAccount == null) {
             return "用户信息错误";
         }
-        log.info(String.format("添加用户信息,请求服务节点端口：%1$s",port));
+        log.info(String.format("添加用户信息,请求服务节点端口：%1$s", port));
         return userAccountService.addUser(userAccount);
     }
 
     @GetMapping("/exception")
-    public String exceptionRequestTest(){
+    public String exceptionRequestTest() {
         log.info("服务异常测试");
         return userAccountService.exceptionRequestTest();
     }

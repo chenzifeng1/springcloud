@@ -33,13 +33,14 @@ public class UserAccount {
 
     /**
      * 处理降级返回的信息
+     *
      * @return
      */
-    public static UserAccount getInstanceAccount(){
-        if(userAccount==null){
-            synchronized (UserAccount.class){
-                if(userAccount==null){
-                    userAccount = new UserAccount(-1,"降级处理User",-1,"777777@gmail");
+    public static UserAccount getInstanceAccount() {
+        if (userAccount == null) {
+            synchronized (UserAccount.class) {
+                if (userAccount == null) {
+                    userAccount = new UserAccount(-1, "降级处理User", -1, "777777@gmail");
                 }
             }
 

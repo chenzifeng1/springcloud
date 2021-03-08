@@ -16,7 +16,7 @@ public class EurekaClientApplication {
     }
 
     @Bean
-    public RestTemplate RestTemplate(){
+    public RestTemplate RestTemplate() {
         return new RestTemplate();
     }
 

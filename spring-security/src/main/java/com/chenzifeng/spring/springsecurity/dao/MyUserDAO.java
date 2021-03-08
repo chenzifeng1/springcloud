@@ -20,13 +20,13 @@ public interface MyUserDAO extends BaseMapper<MyUser> {
 
     /**
      * 根据用户名获取user对象
+     *
      * @param name
      * @return
      */
     MyUser findUserByUserName(@Param("name") String name);
 
     /**
-     *
      * @param myUser
      */
     void insertUser(@Param("myUser") MyUser myUser);

@@ -24,9 +24,9 @@ import java.io.IOException;
 public class LoggingClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {
     @Override
     public ClientHttpResponse intercept(HttpRequest httpRequest, byte[] bytes, ClientHttpRequestExecution clientHttpRequestExecution) throws IOException {
-        log.info("拦截到的请求："+httpRequest.getURI().toString());
+        log.info("拦截到的请求：" + httpRequest.getURI().toString());
         //在这里发起请求调用，获取调用之后的响应信息
-        ClientHttpResponse clientHttpResponse = clientHttpRequestExecution.execute(httpRequest,bytes);
+        ClientHttpResponse clientHttpResponse = clientHttpRequestExecution.execute(httpRequest, bytes);
         return clientHttpResponse;
     }
 }

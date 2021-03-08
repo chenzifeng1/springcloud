@@ -23,7 +23,7 @@ public class HealthStatusService implements HealthIndicator {
 
     @Override
     public Health health() {
-        if(isHealthStatus){
+        if (isHealthStatus) {
             return new Health.Builder().up().build();
         }
         return new Health.Builder().down().build();
@@ -33,7 +33,7 @@ public class HealthStatusService implements HealthIndicator {
         isHealthStatus = healthStatus;
     }
 
-    public String getHealthStatus(){
+    public String getHealthStatus() {
         return this.isHealthStatus.toString();
     }
 }

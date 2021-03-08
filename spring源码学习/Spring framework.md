@@ -125,7 +125,8 @@ refresh(）这个方法返回一个静态指定的ApplicationListener的集合�
 		}
 ```
 
-注释上说这个方法为刷新准备上下文，设置它的启动时间和活动标志以及执行所有属性的初始化。我们可以这个方法上来为`startupDate` 属性赋值为当前时间的毫秒数。然后设置了将cloesed和active进行了设置。之后的代码实际上只是根据日志级别来打印不同的日志。
+注释上说这个方法为刷新准备上下文，设置它的启动时间和活动标志以及执行所有属性的初始化。我们可以这个方法上来为`startupDate`
+属性赋值为当前时间的毫秒数。然后设置了将cloesed和active进行了设置。之后的代码实际上只是根据日志级别来打印不同的日志。
 
 - `ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();`
 
@@ -165,7 +166,8 @@ protected final void refreshBeanFactory() throws BeansException {
 }
 ```
 
-注释：此实现对此上下文的基础bean工厂执行实际的刷新，关闭前一个bean工厂（如果有），并为上下文生命周期的下一阶段初始化一个新的bean工厂。这里就是看一下上个生命周期是否有beanfactory，如果有的话就销毁，关闭，没有的话就创建一个并且初始化。其中我们可以关注一个有意思的方法`customizeBeanFactory(beanFactory);` 这个方法的意思是定制化beanFactory，而这个方法的实现很简单：
+注释：此实现对此上下文的基础bean工厂执行实际的刷新，关闭前一个bean工厂（如果有），并为上下文生命周期的下一阶段初始化一个新的bean工厂。这里就是看一下上个生命周期是否有beanfactory，如果有的话就销毁，关闭，没有的话就创建一个并且初始化。其中我们可以关注一个有意思的方法`customizeBeanFactory(beanFactory);`
+这个方法的意思是定制化beanFactory，而这个方法的实现很简单：
 
 ```java
 protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
@@ -178,7 +180,7 @@ protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
 }
 ```
 
-就是判断beanFactory的两个属性是否被设置，如果我们在配置文件中设置了这两个属性，那么就在这里将这两个属性的值赋给beanFactory的对应的属性中去。这两个属性分别是   
+就是判断beanFactory的两个属性是否被设置，如果我们在配置文件中设置了这两个属性，那么就在这里将这两个属性的值赋给beanFactory的对应的属性中去。这两个属性分别是
 
 `allowBeanDefinitionOveriding` : 允许Bean定义信息被重写
 
@@ -188,7 +190,7 @@ protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
 
 通过将委派给一个或多个bean定义读取器，将bean定义加载到给定的bean工厂中。
 
-`loadBeanDefinitions(beanFactory);` 
+`loadBeanDefinitions(beanFactory);`
 
 我们可以看一下如何让通过beanDefinationReader来完成bean定义信息加载的，下面是这个抽象方法的实现类
 
@@ -215,12 +217,12 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
 1. 为给定的BeanFactory初始化一个XmlBeanDefinitionReader的对象，初始化的时候会有很多操作，暂时先不去深究。
 2. 为这个XmlBeanDefinitionReader对象设置一些属性：
     1. private Environment environment(系统环境属性)：设置在读取bean定义时要使用的环境。 最常用于评估概要文件信息，以确定应读取哪些bean定义，应省略哪些。
-    2. private ResourceLoader resourceLoader(资源加载器)：设置ResourceLoader以用于资源位置。 如果指定ResourcePatternResolver，则Bean定义读取器将能够将资源模式解析为Resource数组。
+    2. private ResourceLoader resourceLoader(资源加载器)：设置ResourceLoader以用于资源位置。
+       如果指定ResourcePatternResolver，则Bean定义读取器将能够将资源模式解析为Resource数组。
     3. private EntityResolver entityResolver(资源实体解析器)：设置要用于解析的SAX实体解析器。
 3. initBeanDefinitionReader(beanDefinitionReader);
 
-    注释：初始化用于加载此上下文的Bean定义的Bean定义读取器。 默认实现为空。
-    可以在子类中重写，例如，用于关闭XML验证或使用其他XmlBeanDefinitionParser实现
+   注释：初始化用于加载此上下文的Bean定义的Bean定义读取器。 默认实现为空。 可以在子类中重写，例如，用于关闭XML验证或使用其他XmlBeanDefinitionParser实现
 
     ```java
     protected void initBeanDefinitionReader(XmlBeanDefinitionReader reader) {
@@ -228,7 +230,7 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    在这个方法中调用了reader中设置验证的方法，参数是Boolean类型。我们可以看看这个设置验证方法的实现。
+   在这个方法中调用了reader中设置验证的方法，参数是Boolean类型。我们可以看看这个设置验证方法的实现。
 
     ```java
     public void setValidating(boolean validating) {
@@ -237,11 +239,12 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    这个方法设置了校验模式，是否启用Xml验证，默认是true。如果参数是false，就会启用命名空间Aware，一边在这种情况下能正确处理架构的命名空间。这里先记一下，看看这两个值在之后哪里使用了，结合使用场景来对这两个属性理解。
+   这个方法设置了校验模式，是否启用Xml验证，默认是true。如果参数是false，就会启用命名空间Aware，一边在这种情况下能正确处理架构的命名空间。这里先记一下，看看这两个值在之后哪里使用了，结合使用场景来对这两个属性理解。
 
 4. loadBeanDefinitions(beanDefinitionReader);
 
-    注释：根据给定的XmlBeanDefinitionReader来加载bean定义信息，由于bean Factory的生命周期是由`refreshBeanFactory()`这个方法来处理，因此`loadBeanDefinitions()`这个方法应该只用来加载或者是注册bean定义信息
+   注释：根据给定的XmlBeanDefinitionReader来加载bean定义信息，由于bean Factory的生命周期是由`refreshBeanFactory()`
+   这个方法来处理，因此`loadBeanDefinitions()`这个方法应该只用来加载或者是注册bean定义信息
 
     ```java
     protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansException, IOException {
@@ -256,9 +259,10 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    这里主要看参数为字符数组的`loadBeanDefinitions(String...locations)` ,这个getConfigLocations()方法返回一系列资源地址，子类可以重写这个方法设置，以提供一组资源位置以从中加载bean定义。比如说，我在Resources下新建了一个配置文件“myApplicationContext.xml”,在getConfigLocation的时候会读取到这个配置文件的文件名，在之后加载过程中会读取该配置文件中的bean配置信息。
+   这里主要看参数为字符数组的`loadBeanDefinitions(String...locations)` ,这个getConfigLocations()
+   方法返回一系列资源地址，子类可以重写这个方法设置，以提供一组资源位置以从中加载bean定义。比如说，我在Resources下新建了一个配置文件“myApplicationContext.xml”,在getConfigLocation的时候会读取到这个配置文件的文件名，在之后加载过程中会读取该配置文件中的bean配置信息。
 
-    重点看一下loadBeanDefinitions(String... locations)这个方法吧，看我们的配置文件中的信息是如何被加载进去的。
+   重点看一下loadBeanDefinitions(String... locations)这个方法吧，看我们的配置文件中的信息是如何被加载进去的。
 
     ```java
     @Override
@@ -272,7 +276,7 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    遍历传进来的`locations` ,比如说我只配置了一个`applicationContext.xml` 配置文件，这里遍历加载的时候只会加载这一个配置文件里面的bean定义信息。我们看一下如何加载的。
+   遍历传进来的`locations` ,比如说我只配置了一个`applicationContext.xml` 配置文件，这里遍历加载的时候只会加载这一个配置文件里面的bean定义信息。我们看一下如何加载的。
 
     ```java
     @Override
@@ -281,7 +285,7 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    这里其实对loadBeanDefinitions进行了多次重载，继续查看
+   这里其实对loadBeanDefinitions进行了多次重载，继续查看
 
     ```java
     public int loadBeanDefinitions(String location, @Nullable Set<Resource> actualResources) throws BeanDefinitionStoreException {
@@ -324,11 +328,17 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    看看资源加载器是不是资源模式加载器，这个资源加载器在`loadBeanDefinitions(DefaultListableBeanFactory beanFactory)` 这个方法内设置过`beanDefinitionReader.setResourceLoader(this)` 我们现在用到的资源加载器就是在这里设置的，通过断点调试，可以看出两个地方的ResourceLoader是同一个对象。既然resourceLoader是ResourcePatternResolver的实例，那么第一个判断语句为true，我们继续看之后怎么执行。
+   看看资源加载器是不是资源模式加载器，这个资源加载器在`loadBeanDefinitions(DefaultListableBeanFactory beanFactory)`
+   这个方法内设置过`beanDefinitionReader.setResourceLoader(this)`
+   我们现在用到的资源加载器就是在这里设置的，通过断点调试，可以看出两个地方的ResourceLoader是同一个对象。既然resourceLoader是ResourcePatternResolver的实例，那么第一个判断语句为true，我们继续看之后怎么执行。
 
-    `Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);` 这个接口方法的真正执行的方法是`PathMatchingResourcePatternResolver` 的实现方法,具体内容先略过，这个方法返回了一个Resource数组，之后又调用了loadBeanDefinitions的其他重载方法。之后一系列的重载方法的调用，在这个过程中，我们可以关注一下主要参数的变化。
+   `Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);`
+   这个接口方法的真正执行的方法是`PathMatchingResourcePatternResolver`
+   的实现方法,具体内容先略过，这个方法返回了一个Resource数组，之后又调用了loadBeanDefinitions的其他重载方法。之后一系列的重载方法的调用，在这个过程中，我们可以关注一下主要参数的变化。
 
-    String[]→String→Resource[]→Resource→EncodedResource→ 开始真正的做加载BeanDefinitions操作的方法`doLoadBeanDefinitions(InputSource inputSource, Resource resource)` 。看一下`doLoadBeanDefinitions` 这个方法内容:
+   String[]→String→Resource[]→Resource→EncodedResource→
+   开始真正的做加载BeanDefinitions操作的方法`doLoadBeanDefinitions(InputSource inputSource, Resource resource)`
+   。看一下`doLoadBeanDefinitions` 这个方法内容:
 
     ```java
     Document doc = doLoadDocument(inputSource, resource);
@@ -339,11 +349,11 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     return count;
     ```
 
-    这个方法会把配置文件转化成Document对象doc，该对象里面基本都是节点信息
+   这个方法会把配置文件转化成Document对象doc，该对象里面基本都是节点信息
 
-    ![Spring%20framework%2080df3c81d678438c85eb0f8059dafbf0/Untitled%202.png](Spring%20framework%2080df3c81d678438c85eb0f8059dafbf0/Untitled%202.png)
+   ![Spring%20framework%2080df3c81d678438c85eb0f8059dafbf0/Untitled%202.png](Spring%20framework%2080df3c81d678438c85eb0f8059dafbf0/Untitled%202.png)
 
-    之后根据Document对象的内容注册BeanDefinition，重点看一下这个方法如何完成注册的。
+   之后根据Document对象的内容注册BeanDefinition，重点看一下这个方法如何完成注册的。
 
     ```java
     public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
@@ -354,7 +364,10 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    这个方法先创建了一个Reader（BeanDefinitionDocumentReader）对象，之后统计了一下BeanDefinition的个数。BeanDefinition的注册具体是在   `documentReader.registerBeanDefinitions(doc, createReaderContext(resource));` 这个方法内完成的。我们来看一下如何实现：这个接口的实现方法调用了`doRegisterBeanDefinitions(Element root)` 这个方法，在spring框架中（java方法命名规范也应该如此）以`doXX` 开头的方法基本都是进行实际操作的方法。这个方法中模拟了一组委托（实际不需要，具体作用可以见注释），之后调用了一个重要的方法`parseBeanDefinitions(root, this.delegate);` 开始解析BeanDefinitions。
+   这个方法先创建了一个Reader（BeanDefinitionDocumentReader）对象，之后统计了一下BeanDefinition的个数。BeanDefinition的注册具体是在   `documentReader.registerBeanDefinitions(doc, createReaderContext(resource));`
+   这个方法内完成的。我们来看一下如何实现：这个接口的实现方法调用了`doRegisterBeanDefinitions(Element root)` 这个方法，在spring框架中（java方法命名规范也应该如此）以`doXX`
+   开头的方法基本都是进行实际操作的方法。这个方法中模拟了一组委托（实际不需要，具体作用可以见注释），之后调用了一个重要的方法`parseBeanDefinitions(root, this.delegate);`
+   开始解析BeanDefinitions。
 
     ```java
     protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
@@ -379,7 +392,8 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    先判断一下给定的节点是否指明了默认命名空间，在我们配置文件中没有引用其他的标签，解析的元素都是在默认命名空间里的。获取root的子节点的集合，然后遍历这个集合。遍历的时候看一下正在遍历的元素节点是否是Element，不是的话就不继续解析了。之后会根据元素节点是否属于默认命名空间来调用不同的解析方法`parseCustomElement()`/`parseCustomElement()` 。默认空间的元素一共四种，在parseCustomElement方法中可以很好的看出
+   先判断一下给定的节点是否指明了默认命名空间，在我们配置文件中没有引用其他的标签，解析的元素都是在默认命名空间里的。获取root的子节点的集合，然后遍历这个集合。遍历的时候看一下正在遍历的元素节点是否是Element，不是的话就不继续解析了。之后会根据元素节点是否属于默认命名空间来调用不同的解析方法`parseCustomElement()`
+   /`parseCustomElement()` 。默认空间的元素一共四种，在parseCustomElement方法中可以很好的看出
 
     ```java
     private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
@@ -399,16 +413,16 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    四种元素类型：
+   四种元素类型：
 
-    1. public static final String IMPORT_ELEMENT = "import"; 
+    1. public static final String IMPORT_ELEMENT = "import";
     2. public static final String ALIAS_ELEMENT = "alias";
     3. public static final String BEAN_ELEMENT = "bean"
     4. public static final String NESTED_BEANS_ELEMENT = "beans"
 
-    根据不同元素类型调用不同的解析方法，这里具体不看了，需要再补充。
+   根据不同元素类型调用不同的解析方法，这里具体不看了，需要再补充。
 
-    这里我们可以看一下spring如何解析非默认命名空间的元素的，看一下`parseCustomElement` 的实现，这个方法也调用了自己的重载方法。
+   这里我们可以看一下spring如何解析非默认命名空间的元素的，看一下`parseCustomElement` 的实现，这个方法也调用了自己的重载方法。
 
     ```java
     @Nullable
@@ -428,4 +442,4 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
     }
     ```
 
-    由于不是默认的命名空间，所以我们得先获取元素所在的命名空间，之后再根据命名空间来获取对应的NamespaceHandler
+   由于不是默认的命名空间，所以我们得先获取元素所在的命名空间，之后再根据命名空间来获取对应的NamespaceHandler

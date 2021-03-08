@@ -13,17 +13,17 @@
 #  application:
 #    name: eureka-server
 #server:
-    #  port: 8762
+#  port: 8762
 
 spring:
   profiles:
     active: erk2
   application:
     name: EurekaServer
-#  security:
-#    user:
-#      name: czf
-#      password: 123456
+  #  security:
+  #    user:
+  #      name: czf
+  #      password: 123456
   datasource:
     password:
   boot:

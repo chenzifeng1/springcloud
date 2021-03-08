@@ -15,11 +15,11 @@ class ProgramPracticeApplicationTests {
                 "  \"alarm_type\":2\n" +
                 "}";
 
-       GsonTest gt = new  Gson().fromJson(json,GsonTest.class);
+        GsonTest gt = new Gson().fromJson(json, GsonTest.class);
         System.out.println(gt.getAlarmType());
     }
 
-    public class GsonTest{
+    public class GsonTest {
         int tankId;
         int alarmType;
 

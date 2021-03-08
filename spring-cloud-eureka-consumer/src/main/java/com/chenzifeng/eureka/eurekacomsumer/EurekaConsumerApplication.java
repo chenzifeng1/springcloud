@@ -31,7 +31,7 @@ public class EurekaConsumerApplication {
 
     @Bean
     @LoadBalanced
-    public RestTemplate getRestTemplateInstance(){
+    public RestTemplate getRestTemplateInstance() {
         RestTemplate template = new RestTemplate();
         template.getInterceptors().add(new LoggingClientHttpRequestInterceptor());
         return template;

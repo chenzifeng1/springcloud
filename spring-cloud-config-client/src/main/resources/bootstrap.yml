@@ -14,9 +14,9 @@ spring:
     name: config-client
   cloud:
     config:
-#      discovery:
-#        enabled: true
-#        service-id: config-center
+      #      discovery:
+      #        enabled: true
+      #        service-id: config-center
       profile: test
       label: master
       uri: http://localhost:9999/

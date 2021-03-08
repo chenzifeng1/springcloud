@@ -20,10 +20,10 @@ import java.util.Map;
  */
 
 public class BootstrapConfigurer implements PropertySourceLocator {
-    public static final String SPRING_CLOUD_CONFIG_DISCOVERY_ENABLED="spring.cloud.config.discovery.enabled";
-    public static final String SPRING_CLOUD_CONFIG_DISCOVERY_service_id="spring.cloud.config.discovery.service-id";
-    public static final String SPRING_CLOUD_CONFIG_PROFILE="spring.cloud.config.profile";
-    public static final String SPRING_CLOUD_CONFIG_LABEL="spring.cloud.config.label";
+    public static final String SPRING_CLOUD_CONFIG_DISCOVERY_ENABLED = "spring.cloud.config.discovery.enabled";
+    public static final String SPRING_CLOUD_CONFIG_DISCOVERY_service_id = "spring.cloud.config.discovery.service-id";
+    public static final String SPRING_CLOUD_CONFIG_PROFILE = "spring.cloud.config.profile";
+    public static final String SPRING_CLOUD_CONFIG_LABEL = "spring.cloud.config.label";
 
     @Override
     public PropertySource<?> locate(Environment environment) {
@@ -42,10 +42,10 @@ public class BootstrapConfigurer implements PropertySourceLocator {
 
     private Map<String, Object> setConfig(Environment environment) {
         Map<String, Object> property = new HashMap<>();
-        property.put(SPRING_CLOUD_CONFIG_DISCOVERY_ENABLED,true);
-        property.put(SPRING_CLOUD_CONFIG_DISCOVERY_service_id,"config-center");
-        property.put(SPRING_CLOUD_CONFIG_PROFILE,"test");
-        property.put(SPRING_CLOUD_CONFIG_LABEL,"master");
+        property.put(SPRING_CLOUD_CONFIG_DISCOVERY_ENABLED, true);
+        property.put(SPRING_CLOUD_CONFIG_DISCOVERY_service_id, "config-center");
+        property.put(SPRING_CLOUD_CONFIG_PROFILE, "test");
+        property.put(SPRING_CLOUD_CONFIG_LABEL, "master");
         return property;
     }
 }

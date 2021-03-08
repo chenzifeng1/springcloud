@@ -25,6 +25,6 @@ public class MyLogoutSuccessHandler implements org.springframework.security.web.
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         //在这里我们可以释放掉用户的一些资源 或者记录一下用户登出的时间信息
 
-        log.info("我走了，时间是:"+ TimeUtils.getNowTimeString());
+        log.info("我走了，时间是:" + TimeUtils.getNowTimeString());
     }
 }

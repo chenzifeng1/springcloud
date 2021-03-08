@@ -22,14 +22,14 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ServiceApiImpl implements ProviderConsumeApi {
 
 
-    private static final Map<Integer,UserAccount> userMap = new ConcurrentHashMap<>();
+    private static final Map<Integer, UserAccount> userMap = new ConcurrentHashMap<>();
 
     /**
      * 初始化user列表，代替mysql查询或者缓存查询
      */
     static {
         for (int i = 0; i < 5; i++) {
-            userMap.put(i,new UserAccount(i,"test"+i,i%3,String.format(UserAccount.emailFormat,i)));
+            userMap.put(i, new UserAccount(i, "test" + i, i % 3, String.format(UserAccount.emailFormat, i)));
         }
     }
 
@@ -41,7 +41,7 @@ public class ServiceApiImpl implements ProviderConsumeApi {
     @Override
     public List<UserAccount> getUserIdList() {
         List<UserAccount> users = new ArrayList<>();
-        userMap.forEach((userId,user)->{
+        userMap.forEach((userId, user) -> {
             users.add(user);
         });
         return users;
@@ -49,17 +49,17 @@ public class ServiceApiImpl implements ProviderConsumeApi {
 
     @Override
     public String addUser(UserAccount user) {
-        if(userMap.containsKey(user.getId())){
+        if (userMap.containsKey(user.getId())) {
             return "用户信息已存在";
-        }else {
-            userMap.put(user.getId(),user);
+        } else {
+            userMap.put(user.getId(), user);
             return "添加成功";
         }
     }
 
     @Override
     public String exceptionRequestTest() {
-        int i = 1/0;
+        int i = 1 / 0;
         return "出现异常";
     }
 }

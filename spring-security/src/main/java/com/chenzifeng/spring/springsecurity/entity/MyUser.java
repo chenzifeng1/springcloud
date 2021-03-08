@@ -27,7 +27,7 @@ public class MyUser extends User {
 
     private String password;
 
-    private  String username;
+    private String username;
 
     public MyUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
@@ -36,7 +36,7 @@ public class MyUser extends User {
     }
 
     public MyUser() {
-        super("user","password", Collections.singleton(new SimpleGrantedAuthority("guest")));
+        super("user", "password", Collections.singleton(new SimpleGrantedAuthority("guest")));
     }
 
     public String getEmail() {

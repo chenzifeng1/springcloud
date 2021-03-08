@@ -41,7 +41,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
         MyUser user = myUserService.findByUsername(username);
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("没有对应的用户信息");
         }
 

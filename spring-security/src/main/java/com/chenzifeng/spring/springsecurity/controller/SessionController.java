@@ -23,18 +23,18 @@ import java.util.HashSet;
 public class SessionController {
 
     @GetMapping("/list")
-    public String list(){
+    public String list() {
         return "redis list";
     }
 
     @GetMapping("/get_all")
-    public HashMap<String,Object> getSessionAttributes(HttpSession httpSession){
-        HashMap<String,Object> hashMap = new HashMap<>();
+    public HashMap<String, Object> getSessionAttributes(HttpSession httpSession) {
+        HashMap<String, Object> hashMap = new HashMap<>();
 
         Enumeration<String> attributeNames = httpSession.getAttributeNames();
 
-        for (;attributeNames.hasMoreElements();){
-            String name =  attributeNames.nextElement();
+        for (; attributeNames.hasMoreElements(); ) {
+            String name = attributeNames.nextElement();
             hashMap.put(name, httpSession.getAttribute(name));
         }
 

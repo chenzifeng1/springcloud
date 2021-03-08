@@ -17,6 +17,7 @@ public class SpringcloudZuulApplication {
 
     /**
      * 将TokenFilter加入到请求拦截队列
+     *
      * @return
      */
     @Bean

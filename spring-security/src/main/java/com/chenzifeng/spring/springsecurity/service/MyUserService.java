@@ -13,6 +13,7 @@ public interface MyUserService extends IService<MyUser> {
 
     /**
      * 根据用户名获取user对象
+     *
      * @param username
      * @return
      */
@@ -20,17 +21,17 @@ public interface MyUserService extends IService<MyUser> {
 
     /**
      * 保存用户信息
+     *
      * @param user
      */
     void saveUser(MyUser user);
 
 
     /**
-     *
      * @param myUser
      * @return
      */
-    default Boolean checkUserInfo(MyUser myUser){
-        return  !(myUser == null||myUser.getUsername()==null||myUser.getPassword()==null);
+    default Boolean checkUserInfo(MyUser myUser) {
+        return !(myUser == null || myUser.getUsername() == null || myUser.getPassword() == null);
     }
 }

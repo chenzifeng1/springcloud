@@ -2,6 +2,7 @@ package com.chenzifeng.spring.springsecurity.entity;
 
 /**
  * 角色名的枚举
+ *
  * @author czf
  */
 public enum RoleEnum {
@@ -14,7 +15,6 @@ public enum RoleEnum {
 
     /**
      * 角色名
-     *
      */
     private final String roleName;
 

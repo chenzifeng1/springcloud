@@ -15,7 +15,7 @@ import java.util.Date;
 public class TimeUtils {
     public static final SimpleDateFormat formatOne = new SimpleDateFormat("yyyy-MM-DD");
 
-    public static String getNowTimeString(){
+    public static String getNowTimeString() {
         return formatOne.format(new Date());
     }
 }

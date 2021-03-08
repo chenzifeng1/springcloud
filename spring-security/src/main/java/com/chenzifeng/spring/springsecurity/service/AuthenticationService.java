@@ -11,5 +11,5 @@ package com.chenzifeng.spring.springsecurity.service;
  */
 public interface AuthenticationService {
 
-    void doCheckLoginForm(String username , String password);
+    void doCheckLoginForm(String username, String password);
 }

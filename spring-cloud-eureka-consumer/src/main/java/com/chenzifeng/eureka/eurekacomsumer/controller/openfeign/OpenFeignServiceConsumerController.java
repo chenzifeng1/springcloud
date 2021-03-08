@@ -28,34 +28,33 @@ public class OpenFeignServiceConsumerController {
     private ServiceApi serviceApi;
 
 
-
     @Autowired
     private FeignService feignService;
 
     @GetMapping("/e")
-    public String exceptionTest(){
+    public String exceptionTest() {
         return serviceApi.exceptionRequestTest();
     }
 
     @GetMapping("/getAccountById")
-    public UserAccount getUserAccount(@RequestParam("userId")Integer id){
+    public UserAccount getUserAccount(@RequestParam("userId") Integer id) {
         return feignService.getUserInfo(id);
     }
 
     @GetMapping("/getAccountList")
-    public List<UserAccount> getUserAccounts(){
+    public List<UserAccount> getUserAccounts() {
         log.info("请求获取用户列表");
         return feignService.getUserIdList();
     }
 
     @GetMapping("/getFirst")
-    public UserAccount getFirstAccount(){
+    public UserAccount getFirstAccount() {
         return feignService.getFirstUser();
     }
 
     @GetMapping("/addUser")
-    public String addUserAccount(Integer id,String name,Integer status,String email){
-        return feignService.addUser(new UserAccount(id,name,status,email));
+    public String addUserAccount(Integer id, String name, Integer status, String email) {
+        return feignService.addUser(new UserAccount(id, name, status, email));
     }
 
 

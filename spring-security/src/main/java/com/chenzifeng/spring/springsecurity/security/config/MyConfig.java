@@ -97,9 +97,9 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 // 这里对放开static的页面和身份认证接口的访问 避免无限循环授权认证的重定向
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/login","/logout").permitAll()
-                .antMatchers(HttpMethod.POST,"/form","/logOn").permitAll()
-                .antMatchers("/login.html", "/logon.html")
+                .antMatchers(HttpMethod.GET, "/login", "/logout").permitAll()
+                .antMatchers(HttpMethod.POST, "/form", "/logOn").permitAll()
+                .antMatchers("/login.html", "/logon.html", "/verify_code", "/templates/**.html")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -109,7 +109,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
                     1. 集群式的会话 如果用session共享来实现，太消耗资源
                     2. jwt 可以通过token令牌来进行用户的授权认证
                  */
-            http.addFilterAt(loginFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAt(loginFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
 
@@ -143,7 +143,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource);
 //                .withUser(myUser)  withUser 创建一个User
-                //设置 默认值
+        //设置 默认值
 //                .and()
 //                .userDetailsService(userServiceImpl)
 //                .and()

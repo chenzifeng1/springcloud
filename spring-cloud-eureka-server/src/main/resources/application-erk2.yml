@@ -8,7 +8,7 @@ eureka:
     hostname: erk2.com
   # 自定义标签
   metadata-map:
-      creater: chenzifeng
+    creater: chenzifeng
   server:
     enable-self-preservation: false
 server:

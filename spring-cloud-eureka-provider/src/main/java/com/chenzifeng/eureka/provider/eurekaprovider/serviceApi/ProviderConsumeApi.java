@@ -13,23 +13,26 @@ import java.util.List;
  * @Date: 2020/12/20 10:57
  * @Version: 1.0
  */
-public interface ProviderConsumeApi  {
+public interface ProviderConsumeApi {
 
     /**
      * 获取用户id
+     *
      * @param userId
      * @return
      */
-     UserAccount getUserInfo(Integer userId);
+    UserAccount getUserInfo(Integer userId);
 
     /**
      * 获取用户列表
+     *
      * @return
      */
     List<UserAccount> getUserIdList();
 
     /**
      * 增加用户信息
+     *
      * @param user
      * @return
      */
@@ -37,6 +40,7 @@ public interface ProviderConsumeApi  {
 
     /**
      * 异常测试类
+     *
      * @return
      */
     String exceptionRequestTest();

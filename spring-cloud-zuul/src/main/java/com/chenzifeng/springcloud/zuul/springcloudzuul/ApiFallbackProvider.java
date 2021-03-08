@@ -24,12 +24,13 @@ import java.io.InputStream;
  */
 @Slf4j
 @Component
-public class ApiFallbackProvider  implements FallbackProvider {
+public class ApiFallbackProvider implements FallbackProvider {
     private static final String OK_RESPONSE = "OK";
     private static final String ROUTE = "provider";
 
     /**
      * 指定该方法做哪个route的熔断
+     *
      * @return
      */
     @Override
@@ -39,24 +40,26 @@ public class ApiFallbackProvider  implements FallbackProvider {
 
     /**
      * 给客户端返回降级的信息
+     *
      * @param route
      * @param cause
      * @return
      */
     @Override
     public ClientHttpResponse fallbackResponse(String route, Throwable cause) {
-        if(cause!=null&&cause.getCause()!=null){
+        if (cause != null && cause.getCause() != null) {
             String msg = cause.getMessage();
-            log.error("the service {} throw a exception {}",route,msg);
+            log.error("the service {} throw a exception {}", route, msg);
         }
         return getFallbackResponse();
     }
 
     /**
      * 降级消息
+     *
      * @return
      */
-    public ClientHttpResponse getFallbackResponse(){
+    public ClientHttpResponse getFallbackResponse() {
         return new ClientHttpResponse() {
             @Override
             public HttpStatus getStatusCode() throws IOException {

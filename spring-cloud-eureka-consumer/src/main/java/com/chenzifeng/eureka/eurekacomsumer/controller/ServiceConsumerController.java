@@ -78,6 +78,7 @@ public class ServiceConsumerController {
     /**
      * 使用负载均衡来完成服务调用 LoadBalancerClient 会过滤Status为DOWN的服务实例，然后在剩余的实例中选取实例来提供服务
      * lbc实例是自动注入的，bean方法在启动类中，加了 @LoadBalanced 注解
+     *
      * @return
      */
     @GetMapping("/hi1")

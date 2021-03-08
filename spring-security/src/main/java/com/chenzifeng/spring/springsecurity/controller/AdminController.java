@@ -24,49 +24,49 @@ import java.util.Random;
 public class AdminController {
 
 
-
     /**
-     *这个注解只能实现 或 的关系，表示有其中的一个角色即可。不能实现 并 的关系
+     * 这个注解只能实现 或 的关系，表示有其中的一个角色即可。不能实现 并 的关系
      */
     @GetMapping("/hi")
     @Secured("{ROLE_admin，ROLE_user}")
-    public JSONObject hi(){
+    public JSONObject hi() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("msg","hi");
-        jsonObject.put("kind","admin||user");
+        jsonObject.put("msg", "hi");
+        jsonObject.put("kind", "admin||user");
         return jsonObject;
     }
 
 
     @GetMapping("/info")
     @PreAuthorize("hasRole('ROLE_admin')")
-    public JSONObject info(){
+    public JSONObject info() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("msg","info");
-        jsonObject.put("kind","admin");
+        jsonObject.put("msg", "info");
+        jsonObject.put("kind", "admin");
         return jsonObject;
     }
 
 
     @GetMapping("/info2")
     @PreAuthorize("hasAnyRole('ROLE_admin','ROLE_user')")
-    public JSONObject info2(){
+    public JSONObject info2() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("msg","info2");
-        jsonObject.put("kind","admin");
+        jsonObject.put("msg", "info2");
+        jsonObject.put("kind", "admin");
         return jsonObject;
     }
 
     /**
      * and 关系
+     *
      * @return
      */
     @GetMapping("/info3")
     @PreAuthorize("hasRole('ROLE_admin') AND hasRole('ROLE_user')")
-    public JSONObject info3(){
+    public JSONObject info3() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("msg","info3");
-        jsonObject.put("kind","admin");
+        jsonObject.put("msg", "info3");
+        jsonObject.put("kind", "admin");
         return jsonObject;
     }
 
@@ -75,7 +75,7 @@ public class AdminController {
      * 使用于跨系统，或者无状态的访问
      */
     @PostAuthorize("returnObject==1")
-    public int info4(){
+    public int info4() {
         System.out.println("条件访问");
         return new Random().nextInt(2);
     }

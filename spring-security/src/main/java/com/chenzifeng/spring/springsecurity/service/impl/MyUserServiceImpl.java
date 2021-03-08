@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class MyUserServiceImpl  extends ServiceImpl<MyUserDAO,MyUser> implements MyUserService {
+public class MyUserServiceImpl extends ServiceImpl<MyUserDAO, MyUser> implements MyUserService {
 
     @Autowired
     MyUserDAO myUserDAO;

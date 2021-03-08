@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
@@ -24,6 +24,14 @@
                 <label for="password">密码</label>
                 <input type="password" name="password" id="password">
                 <span class="spin"></span>
+            </div>
+            <div class="input">
+                <label for="verifyCodeText">验证码</label>
+                <input type="text" name="verifyCodeText" id="verifyCodeText">
+                <span class="spin"></span>
+                <label for="verifyCode"></label>
+                <img src="/verify_code" alt="" id="verifyCode">
+
             </div>
             <div class="button login">
                 <button type="submit">

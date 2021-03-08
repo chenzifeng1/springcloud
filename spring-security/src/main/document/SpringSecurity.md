@@ -1,11 +1,12 @@
-# Spring Security 
+# Spring Security
 
 Spring Security作为一个权限认证的安全框架，为我们提供了两个主要功能：
+
 1. 身份认证：登录时进行校验用户的身份信息
 2. 访问控制：检查用户是否有权限访问url
 
-
 ## 身份认证
+
 Spring security关于身份认证就一个主要的接口：
 
 ```java
@@ -18,8 +19,8 @@ Spring security关于身份认证就一个主要的接口：
 - 参数是WebSecurity
 - 参数是AuthenticationManageBuilder
 
-1. configure(HttpSecurity http);
-    这里是负责配置对http请求的操作，比如说对哪些请求需要授权，那些请求可以放开，比如定义用户登录页面以及在登录时的一些配置。
+1. configure(HttpSecurity http); 这里是负责配置对http请求的操作，比如说对哪些请求需要授权，那些请求可以放开，比如定义用户登录页面以及在登录时的一些配置。
+
 ```java
 public class MyConfig extends WebSecurityConfigurerAdapter{
     @Override    
@@ -66,9 +67,11 @@ public class MyConfig extends WebSecurityConfigurerAdapter{
 ```
 
 ## Spring security 登录认证源码解析
+
 在Spring security中，用户的身份认证和授权访问是通过过滤器链来实现的。完成用户身份认证的过滤器是
-`UsernamePasswordAuthenticationFilter`。这个过滤器看起来比较简单，除了`attemptAuthentication()`，`obtainPassword()`，`obtainUsername`以及`setDetails()`之外就只有几个get/set方法了。
-那么我们主要看看这几个方法的内容：
+`UsernamePasswordAuthenticationFilter`。这个过滤器看起来比较简单，除了`attemptAuthentication()`，`obtainPassword()`，`obtainUsername`
+以及`setDetails()`之外就只有几个get/set方法了。 那么我们主要看看这几个方法的内容：
+
 ```java
 public class UsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     
@@ -104,17 +107,18 @@ public class UsernamePasswordAuthenticationFilter extends AbstractAuthentication
     }
 }
 ```
+
 - obtainPassword/obtainUsername: 两个方法的相似，都是从HttpRequest对象中获取属性值，这也是Spring Security在进行表单登录时，
-默认采用Key/Value形式的原因。如果想使用Json的形式，可以继承这个过滤器然后重写这两个方法。
+  默认采用Key/Value形式的原因。如果想使用Json的形式，可以继承这个过滤器然后重写这两个方法。
 - setDetails: 两个参数，一个`HttpServletRequest`对象，另一个是`UsernamePasswordAuthenticationToken`。首先介绍一下第二个参数  
- `UsernamePasswordAuthenticationToken`可以看作一个携带用户信息属性的验证实体。
+  `UsernamePasswordAuthenticationToken`可以看作一个携带用户信息属性的验证实体。
 - attemptAuthentication: 这是尝试验证用户信息的方法，方法大概实现了
     1. 获取用户名跟密码
     2. 根据用户名密码创建一个`UsernamePasswordAuthenticationToken`的实例
     3. 设置Details对象，UsernamePasswordAuthenticationToken的Details对象是继承自父类AbstractAuthenticationToken。
-        而details对象是WebAuthenticationDetails的一个实例。这个实例主要描述两个信息：remoteAddress和sessionId
+       而details对象是WebAuthenticationDetails的一个实例。这个实例主要描述两个信息：remoteAddress和sessionId
     4. 调用验证方法`authenticate`
-    
+
 ```java
 public class ProviderManager implements AuthenticationManager, MessageSourceAware, InitializingBean {
     

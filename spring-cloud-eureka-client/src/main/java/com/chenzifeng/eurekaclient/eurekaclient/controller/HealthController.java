@@ -24,7 +24,7 @@ public class HealthController {
     HealthStatusService hsrv;
 
     @GetMapping("/set")
-    public String setHealStatus(@RequestParam("status")Boolean isHealth){
+    public String setHealStatus(@RequestParam("status") Boolean isHealth) {
         hsrv.setHealthStatus(isHealth);
         return hsrv.getHealthStatus();
     }

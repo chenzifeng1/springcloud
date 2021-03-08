@@ -17,7 +17,7 @@ import java.util.List;
  * @Version: 1.0
  */
 @Service
-public class FeignServiceImpl implements FeignService{
+public class FeignServiceImpl implements FeignService {
 
     @Autowired
     private ServiceApi serviceApi;
@@ -48,7 +48,7 @@ public class FeignServiceImpl implements FeignService{
         return serviceApi.addUser(user);
     }
 
-    public String ert(){
+    public String ert() {
         return "ert error";
     }
 

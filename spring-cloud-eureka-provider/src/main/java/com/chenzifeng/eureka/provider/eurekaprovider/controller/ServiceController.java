@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentMap;
 @RequestMapping("/service-help")
 public class ServiceController {
 
-    public static ConcurrentMap<String,Integer> consumerRequestTime = new ConcurrentHashMap<>();
+    public static ConcurrentMap<String, Integer> consumerRequestTime = new ConcurrentHashMap<>();
 
 
     @Value("${server.port}")
@@ -30,12 +30,12 @@ public class ServiceController {
 
 
     @GetMapping("/port")
-    public String getServiceName(@RequestParam("consumer")String consumer) {
-        if(!consumerRequestTime.containsKey(consumer)){
-            consumerRequestTime.put(consumer,1);
-        }else {
-            consumerRequestTime.put(consumer,consumerRequestTime.get(consumer)+1);
+    public String getServiceName(@RequestParam("consumer") String consumer) {
+        if (!consumerRequestTime.containsKey(consumer)) {
+            consumerRequestTime.put(consumer, 1);
+        } else {
+            consumerRequestTime.put(consumer, consumerRequestTime.get(consumer) + 1);
         }
-        return "访问者："+consumer+" 访问次数："+consumerRequestTime.get(consumer) + " port:"+port;
+        return "访问者：" + consumer + " 访问次数：" + consumerRequestTime.get(consumer) + " port:" + port;
     }
 }

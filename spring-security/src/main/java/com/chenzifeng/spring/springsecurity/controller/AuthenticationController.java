@@ -27,29 +27,30 @@ public class AuthenticationController {
     private MyUserService myUserService = null;
 
     @PostMapping("/form")
-    public String form(String username,String password){
+    public String form(String username, String password) {
         System.out.println(username + " : " + password);
         return "redirect:/index.html";
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         System.out.println("在这里做重定向");
         return "redirect:/static/login.html";
     }
 
     @GetMapping("/logout")
-    public void logout(){
+    public void logout() {
 
     }
 
     /**
      * 注册接口
+     *
      * @param myUser
      * @return
      */
     @PostMapping("/logOn")
-    public JSONObject logOn(MyUser myUser){
+    public JSONObject logOn(MyUser myUser) {
         myUserService.save(myUser);
         return JsonUtils.defaultSuccessResponse();
     }

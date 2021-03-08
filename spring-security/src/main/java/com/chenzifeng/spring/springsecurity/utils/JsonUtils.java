@@ -43,59 +43,61 @@ public class JsonUtils {
 
     /**
      * 成功响应
+     *
      * @param info
      * @return
      */
-    public static JSONObject successReponse(String info){
+    public static JSONObject successReponse(String info) {
         JSONObject json = defaultSuccessResponse();
-        json.put(INFO,info);
+        json.put(INFO, info);
         return json;
     }
 
 
     /**
      * 默认成功响应
+     *
      * @return
      */
-    public static JSONObject defaultSuccessResponse(){
+    public static JSONObject defaultSuccessResponse() {
         JSONObject json = new JSONObject();
-        json.put(STATUS,SUCCESS_INFO);
-        json.put(CODE,SUCCESS_CODE);
+        json.put(STATUS, SUCCESS_INFO);
+        json.put(CODE, SUCCESS_CODE);
         return json;
     }
 
 
     /**
      * 获取响应
+     *
      * @param info
      * @param status
      * @param code
      * @return
      */
-    public static JSONObject getResponse(String info,String status,int code){
+    public static JSONObject getResponse(String info, String status, int code) {
         JSONObject json = new JSONObject();
-        json.put(INFO,info);
-        json.put(STATUS,status);
-        json.put(CODE,code);
+        json.put(INFO, info);
+        json.put(STATUS, status);
+        json.put(CODE, code);
         return json;
     }
 
     /**
-     *
      * @param s
      * @param obj
      * @return
      */
     public static JSONObject ok(String s, Object obj) {
         JSONObject json = new JSONObject();
-        json.put(INFO,s);
-        json.put(OBJECT,obj);
+        json.put(INFO, s);
+        json.put(OBJECT, obj);
         return json;
     }
 
     public static JSONObject error(String message) {
-         JSONObject json = new JSONObject();
-         json.put(INFO,message);
-         return json;
+        JSONObject json = new JSONObject();
+        json.put(INFO, message);
+        return json;
     }
 }

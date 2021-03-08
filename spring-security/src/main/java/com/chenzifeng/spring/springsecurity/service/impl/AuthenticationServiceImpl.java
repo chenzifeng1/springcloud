@@ -18,6 +18,6 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public void doCheckLoginForm(String username, String password) {
-      log.info("需要进行身份认证的用户为："+username);
+        log.info("需要进行身份认证的用户为：" + username);
     }
 }
